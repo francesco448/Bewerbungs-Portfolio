@@ -1,0 +1,42 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourPassword123!
+    ports:
+      - "1700:1433"
+    volumes:
+      - /mnt/PoolHDD/AppData/razorpages-movie/sqlserver:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P YourPassword123! -Q 'SELECT 1' -No"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - movienet
+
+  razorpagesmovie:
+    image: francesco448/razorpagesmovie:latest
+    container_name: razorpages-movie
+    restart: unless-stopped
+    ports:
+      - "9001:8080"
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - TZ=Europe/Zurich
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    networks:
+      - movienet
+
+networks:
+  movienet:
+    driver: bridge
