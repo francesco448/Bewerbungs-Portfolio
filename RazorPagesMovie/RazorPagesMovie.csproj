@@ -22,4 +22,8 @@
     <Folder Include="wwwroot\lib\fontawesome\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\BewerbungsPortfolio\bewerbungbasis.html" />
+  </ItemGroup>
+
 </Project>
