@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="/css/flaticon.css">
     <link rel="stylesheet" href="/css/theme-default.css">
     <link rel="stylesheet" href="/css/meanmenu.min.css">
-
-    <!-- Ganz wichtig -->
     <link rel="stylesheet" href="/css/style.css">
 
     <link rel="stylesheet" href="/css/owl.transitions.css">
@@ -40,7 +38,6 @@
             height: auto;
         }
 
-        /* Mobile-Menu-Bar: Template-Branding "Techno" durch echten Namen ersetzen */
         .mean-container .mean-bar::before {
             content: "Francesco L. D'Amico";
             font-size: 16px;
@@ -79,15 +76,11 @@
                 margin: 0 auto;
             }
 
-        /* Header aus index-5.html – auf Onepager-Navigation reduziert */
         .portfolio-header .techno_menu ul li a {
             padding-left: 14px;
             padding-right: 14px;
         }
 
-        /* Header braucht immer einen dunklen Hintergrund, sonst ist die
-           weisse Nav-Schrift (Gradient-Text-Trick) oben unsichtbar,
-           solange .sticky (schwarzer BG) noch nicht aktiv ist. */
         #sticky-header.portfolio-header {
             background: rgba(9, 12, 26, .65);
         }
@@ -110,11 +103,6 @@
             display: none;
         }
 
-        /* Hero aus index-4.html – gemäss Mockup kompakter.
-           Theme-CSS verlinkt den Hero-Hintergrund mit einem falschen,
-           relativen Pfad (löst zu /css/assets/... auf und schlägt fehl) –
-           hier mit korrektem Pfad + dunkler Fallback-Farbe überschrieben,
-           damit die weisse Überschrift immer lesbar bleibt. */
         #hero.slider-area.slider8 {
             min-height: 650px;
             background-color: #0b0e1a;
@@ -162,11 +150,6 @@
             display: none;
         }
 
-        /* About – Text links / Infos rechts wie im Mockup.
-           Theme-CSS zieht ".about-area.style-three" mit margin-top:-170px
-           nach oben (Overlap-Effekt fürs Original-Design) – das frisst
-           sich in unseren Hero. Hier neutralisiert, damit "Über mich"
-           sauber unterhalb des Heros beginnt. */
         #about .about-area {
             padding: 90px 0;
             margin-top: 0;
@@ -180,9 +163,6 @@
             margin-top: 20px;
         }
 
-        /* Theme-Klasse "white" auf dem .dreamit-section-title-Wrapper
-           faerbt h1/p/i weiss (fuer dunkle Hintergrundbilder gedacht).
-           Unser About-Bereich ist hell, darum hier auf dunkel zurueckgesetzt. */
         #about .dreamit-section-title h1,
         #about .dreamit-section-title p {
             color: #151423;
@@ -211,7 +191,6 @@
                 color: #0c5adb;
             }
 
-        /* Skills – aus service.html */
         #skills .service-area {
             padding: 90px 0;
         }
@@ -226,7 +205,6 @@
             margin-bottom: 0;
         }
 
-        /* Projekte – Portfolio-Details-Element in 4 Karten umgesetzt */
         #projects .project-card {
             background: #fff;
             height: 100%;
@@ -268,7 +246,6 @@
                     background: #171717;
                 }
 
-        /* Ziele – Services aus landing-01.html */
         #goals .service-area {
             padding: 90px 0;
         }
@@ -278,7 +255,6 @@
             min-height: 220px;
         }
 
-        /* Erfahrung – React Native Developers aus career-details.html, ohne Job Summary */
         #experience .career-details {
             padding: 90px 0;
         }
@@ -328,15 +304,10 @@
             margin-bottom: 12px;
         }
 
-        /* Bildung/Zertifikate – Current Openings aus career.html */
         #education .single-circular-box {
             margin-bottom: 20px;
         }
 
-        /* Theme-CSS zieht ".circular-btn" mit position:relative; top:-42px
-           nach oben in die Titelzeile (fürs Original mit kurzem Text
-           gedacht) – bei uns überlappt der Button dadurch den Beschreibungs-
-           text. Hier als normaler Button unterhalb des Textes gesetzt. */
         #education .circular-btn {
             position: static;
             text-align: left;
@@ -382,7 +353,6 @@
                 cursor: pointer;
             }
 
-        /* Kontakt – Contact Us Look, Inhalt wie Mockup */
         #contact .contact-us-area {
             padding: 90px 0;
         }
@@ -413,10 +383,6 @@
             margin-top: 22px;
         }
 
-        /* Footer – nur Copyright-Zeile gemäss Mockup.
-           Theme-CSS setzt hier ebenfalls einen Hintergrund über einen
-           falschen relativen Pfad (schlägt fehl) – die Copyright-Schrift
-           ist weiss und braucht daher einen eigenen dunklen Hintergrund. */
         .portfolio-footer.footer-middle {
             padding: 0;
             background: #0b0e1a;
@@ -1004,7 +970,6 @@
         </div>
     </section>
 
-    <!-- Bild-Modal für Zeugnisse/Zertifikate -->
     <div class="certificate-modal" id="certificateModal" aria-hidden="true">
         <button type="button" id="certificateClose" aria-label="Schliessen">&times;</button>
         <img id="certificateImage" src="" alt="Zertifikat oder Zeugnis">
@@ -1018,7 +983,6 @@
     <div class="contact-us-area style-two pt-100">
         <div class="container">
 
-            <!-- Überschrift -->
             <div class="row">
                 <div class="col-lg-12">
                     <div class="dreamit-section-title style-two text-center">
@@ -1030,11 +994,9 @@
 
             <div class="row">
 
-                <!-- Linke Seite: Kontaktinformationen -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="row">
 
-                        <!-- Standort -->
                         <div class="col-lg-12">
                             <div class="contact-us-single-box">
                                 <div class="contact-us-icon">
@@ -1048,7 +1010,6 @@
                             </div>
                         </div>
 
-                        <!-- Telefon -->
                         <div class="col-lg-12">
                             <div class="contact-us-single-box">
                                 <div class="contact-us-icon">
@@ -1062,7 +1023,6 @@
                             </div>
                         </div>
 
-                        <!-- E-Mail -->
                         <div class="col-lg-12">
                             <div class="contact-us-single-box">
                                 <div class="contact-us-icon">
@@ -1083,7 +1043,6 @@
                     </div>
                 </div>
 
-                <!-- Rechte Seite: Kontaktformular -->
                 <div class="col-lg-8 col-md-6 col-sm-12">
                     <div class="row">
                         <div class="col-lg-12">
@@ -1100,7 +1059,6 @@
 
                                     <div class="row">
 
-                                        <!-- Name -->
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-title">
                                                 <p>Name (Pflichtfeld)</p>
@@ -1115,7 +1073,6 @@
                                             </div>
                                         </div>
 
-                                        <!-- E-Mail -->
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-title">
                                                 <p>E-Mail (Pflichtfeld)</p>
@@ -1130,7 +1087,6 @@
                                             </div>
                                         </div>
 
-                                        <!-- Telefon -->
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-title">
                                                 <p>Telefon (optional)</p>
@@ -1144,7 +1100,6 @@
                                             </div>
                                         </div>
 
-                                        <!-- Betreff -->
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-title">
                                                 <p>Betreff</p>
@@ -1158,7 +1113,6 @@
                                             </div>
                                         </div>
 
-                                        <!-- Nachricht -->
                                         <div class="col-lg-12">
                                             <div class="form-title">
                                                 <p>Nachricht</p>
@@ -1174,7 +1128,6 @@
                                             </div>
                                         </div>
 
-                                        <!-- Button -->
                                         <div class="col-lg-12">
                                             <div class="contact-form">
                                                 <button type="submit">
@@ -1215,7 +1168,6 @@
         </div>
     </footer>
 
-    <!-- Scroll to top -->
     <div class="scroll-area">
         <div class="top-wrap">
             <div class="go-top-btn-wraper">
@@ -1246,7 +1198,7 @@
     <script src="/js/slick.min.js"></script>
     <script src="/js/jquery.barfiller.js"></script>
 
-    <script>// Zertifikat-/Zeugnisbild öffnen
+    <script>
     (function () {
       var modal = document.getElementById("certificateModal");
       var image = document.getElementById("certificateImage");
