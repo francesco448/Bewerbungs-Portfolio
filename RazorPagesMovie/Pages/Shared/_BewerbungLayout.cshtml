@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/css/nivo-slider.css" />
+    <link rel="stylesheet" href="~/css/animate.css" />
+    <link rel="stylesheet" href="~/css/animated-text.css" />
+    <link rel="stylesheet" href="~/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/flaticon.css" />
+    <link rel="stylesheet" href="~/css/theme-default.css" />
+    <link rel="stylesheet" href="~/css/meanmenu.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+
+    <link rel="stylesheet" href="~/css/owl.transitions.css" />
+    <link rel="stylesheet" href="~/css/widget.css" />
+    <link rel="stylesheet" href="~/css/responsive.css" />
+    <link rel="stylesheet" href="~/css/slick.css" />
+    <link rel="stylesheet" href="~/css/slick-theme.css" />
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body>
+    <div id="sticky-header" class="techno_nav_manu style-two portfolio-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4">
+                    <a class="portfolio-brand" href="#hero">Francesco Lorenzo D'Amico</a>
+                </div>
+                <div class="col-lg-8">
+                    <nav class="techno_menu text-center">
+                        <ul class="nav_scroll">
+                            <li><a href="#about">Über mich</a></li>
+                            <li><a href="#skills">Skills</a></li>
+                            <li><a href="#projects">Projekte</a></li>
+                            <li><a href="#goals">Ziele</a></li>
+                            <li><a href="#experience">Erfahrung</a></li>
+                            <li><a href="#education">Bildung</a></li>
+                            <li><a href="#contact">Kontakt</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-menu-area d-sm-block d-md-block d-lg-none">
+        <div class="mobile-menu">
+            <nav class="techno_menu">
+                <ul class="nav_scroll">
+                    <li><a href="#about">Über mich</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projekte</a></li>
+                    <li><a href="#goals">Ziele</a></li>
+                    <li><a href="#experience">Erfahrung</a></li>
+                    <li><a href="#education">Bildung</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    @RenderBody()
+
+    <footer class="footer-middle portfolio-footer">
+        <div class="container">
+            <div class="row footer-bottom">
+                <div class="col-lg-12">
+                    <div class="footer-bottom-content">
+                        <div class="footer-bottom-content-copy">
+                            <p>© 2026 Francesco Lorenzo D'Amico – Portfolio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="scroll-area">
+        <div class="top-wrap">
+            <div class="go-top-btn-wraper">
+                <div class="go-top go-top-button">
+                    <i class="fas fa-arrow-up"></i>
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/jquery-1.9.0.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <script src="~/js/waypoints.min.js"></script>
+    <script src="~/js/wow.js"></script>
+    <script src="~/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/js/ajax-mail.js"></script>
+    <script src="~/js/animated-text.js"></script>
+    <script src="~/js/isotope.pkgd.min.js"></script>
+    <script src="~/js/jquery.nivo.slider.pack.js"></script>
+    <script src="~/js/jquery.meanmenu.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/jquery.scrollUp.js"></script>
+    <script src="~/js/theme.js"></script>
+    <script src="~/js/slick.js"></script>
+    <script src="~/js/slick.min.js"></script>
+    <script src="~/js/jquery.barfiller.js"></script>
+
+    <script>
+        $(window).on("scroll", function () {
+            var scrolled = $(window).scrollTop();
+            if (scrolled > 300) $(".go-top").addClass("active");
+            if (scrolled < 300) $(".go-top").removeClass("active");
+        });
+
+        $(".go-top").on("click", function () {
+            $("html, body").animate({ scrollTop: "0" }, 1200);
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
