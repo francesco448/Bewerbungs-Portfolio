@@ -1,0 +1,1074 @@
+@page
+@model BewerbungModel
+@{
+    Layout = "_BewerbungLayout";
+    ViewData["Title"] = "Bewerbung – Francesco Lorenzo D'Amico";
+}
+
+@section Styles {
+    <style>
+        .mean-container .mean-bar::before {
+            content: "Francesco L. D'Amico";
+            font-size: 16px;
+            top: 20px;
+            max-width: 75%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .portfolio-section {
+            padding: 90px 0;
+        }
+
+            .portfolio-section:nth-of-type(even) {
+                background: #f8f9fb;
+            }
+
+        .section-kicker {
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            font-weight: 700;
+        }
+
+        .section-title {
+            margin-bottom: 40px;
+        }
+
+            .section-title h2 {
+                font-size: 38px;
+                margin-bottom: 8px;
+            }
+
+            .section-title p {
+                max-width: 760px;
+                margin: 0 auto;
+            }
+
+        .portfolio-header .techno_menu ul li a {
+            padding-left: 14px;
+            padding-right: 14px;
+        }
+
+        #sticky-header.portfolio-header {
+            background: rgba(9, 12, 26, .65);
+        }
+
+        .portfolio-brand {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            display: inline-block;
+            padding: 22px 0;
+            letter-spacing: .02em;
+        }
+
+            .portfolio-brand:hover {
+                color: #fff;
+            }
+
+        .portfolio-header .header-button,
+        .portfolio-header .slider-button-text {
+            display: none;
+        }
+
+        #hero.slider-area.slider8 {
+            min-height: 650px;
+            background-color: #0b0e1a;
+            background-image: url(/images/slider/banner-a.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        #hero .slider-content h1 {
+            line-height: 1.05;
+        }
+
+        #hero .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        #hero .hero-secondary {
+            display: inline-block;
+            padding: 16px 28px;
+            border: 2px solid #fff;
+            color: #fff;
+            font-weight: 700;
+        }
+
+            #hero .hero-secondary:hover {
+                background: #fff;
+                color: #111;
+            }
+
+        #hero .hero-social {
+            margin-top: 25px;
+        }
+
+            #hero .hero-social a {
+                color: #fff;
+                margin-right: 18px;
+                text-decoration: underline;
+            }
+
+        #hero .slider-socail-icon2 {
+            display: none;
+        }
+
+        #about .about-area {
+            padding: 90px 0;
+            margin-top: 0;
+        }
+
+        #about .techno-about-thumb-3 {
+            margin-left: 0;
+        }
+
+        #about .about-facts {
+            margin-top: 20px;
+        }
+
+        #about .dreamit-section-title h1,
+        #about .dreamit-section-title p {
+            color: #151423;
+        }
+
+        #about .about-fact {
+            background: #f8f9fb;
+            border: 1px solid #e6e8f0;
+            padding: 18px 20px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            #about .about-fact strong {
+                color: #151423;
+            }
+
+            #about .about-fact span {
+                color: #33354b;
+            }
+
+            #about .about-fact i {
+                color: #0c5adb;
+            }
+
+        #skills .service-area {
+            padding: 90px 0;
+        }
+
+        #skills .techno-sinlge-service-box,
+        #skills .techno-sinlge-service-box-1,
+        #skills .techno-sinlge-service-box.active {
+            min-height: 210px;
+        }
+
+        #skills .techno-service-title p {
+            margin-bottom: 0;
+        }
+
+        #projects .project-card {
+            background: #fff;
+            height: 100%;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 30px rgba(20,30,60,.08);
+        }
+
+        #projects .portfolio-details-thumb img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+        }
+
+        #projects .portfolio-details-titles {
+            padding: 24px 24px 8px;
+        }
+
+        #projects .details-category {
+            padding: 0 24px;
+        }
+
+        #projects .project-actions {
+            padding: 14px 24px 24px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+            #projects .project-actions a {
+                display: inline-block;
+                padding: 10px 14px;
+                background: #0c5adb;
+                color: #fff;
+                font-weight: 700;
+                border-radius: 2px;
+            }
+
+                #projects .project-actions a.github {
+                    background: #171717;
+                }
+
+        #goals .service-area {
+            padding: 90px 0;
+        }
+
+        #goals .techno-sinlge-service-box,
+        #goals .techno-sinlge-service-box-1 {
+            min-height: 220px;
+        }
+
+        #experience .career-details {
+            padding: 90px 0;
+        }
+
+        #experience .experience-timeline {
+            position: relative;
+            padding-left: 36px;
+        }
+
+            #experience .experience-timeline:before {
+                content: "";
+                position: absolute;
+                top: 8px;
+                bottom: 8px;
+                left: 8px;
+                width: 2px;
+                background: #0c5adb;
+            }
+
+        #experience .experience-item {
+            position: relative;
+            margin-bottom: 28px;
+            padding: 26px 30px;
+            background: #fff;
+            box-shadow: 0 8px 25px rgba(20,30,60,.08);
+        }
+
+            #experience .experience-item:before {
+                content: "";
+                position: absolute;
+                left: -34px;
+                top: 31px;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background: #fff;
+                border: 3px solid #0c5adb;
+            }
+
+            #experience .experience-item h3 {
+                margin-bottom: 6px;
+            }
+
+        #experience .experience-meta {
+            color: #0c5adb;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        #education .single-circular-box {
+            margin-bottom: 20px;
+        }
+
+        #education .circular-btn {
+            position: static;
+            text-align: left;
+            margin-top: 14px;
+            clear: both;
+        }
+
+        #education .circular-btn a {
+            cursor: pointer;
+        }
+
+        .certificate-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            inset: 0;
+            background: rgba(0,0,0,.88);
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+            .certificate-modal.open {
+                display: flex;
+            }
+
+            .certificate-modal img {
+                max-width: 92vw;
+                max-height: 86vh;
+                box-shadow: 0 10px 60px rgba(0,0,0,.5);
+            }
+
+            .certificate-modal button {
+                position: absolute;
+                top: 22px;
+                right: 28px;
+                background: #fff;
+                border: 0;
+                border-radius: 50%;
+                width: 44px;
+                height: 44px;
+                font-size: 25px;
+                cursor: pointer;
+            }
+
+        #contact .contact-us-area {
+            padding: 90px 0;
+        }
+
+        #contact .contact-copy {
+            padding-right: 35px;
+        }
+
+        #contact .contact-links {
+            margin-top: 22px;
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+            #contact .contact-links a {
+                font-weight: 700;
+                text-decoration: underline;
+            }
+
+        #contact .contact-visual img {
+            width: 100%;
+            max-height: 390px;
+            object-fit: contain;
+        }
+
+        #contact .contact-button {
+            margin-top: 22px;
+        }
+
+        .portfolio-footer.footer-middle {
+            padding: 0;
+            background: #0b0e1a;
+        }
+
+        .portfolio-footer .footer-bottom {
+            margin-top: 0;
+            padding: 28px 0;
+        }
+
+        .portfolio-footer .footer-bottom-content-copy p {
+            margin: 0;
+            text-align: center;
+        }
+
+        .portfolio-footer .footer-bottom .col-lg-12 {
+            text-align: center;
+        }
+
+        @@media (max-width: 991px) {
+            #hero.slider-area.slider8 {
+                min-height: auto;
+                padding: 130px 0 80px;
+            }
+
+            #hero .slider-thumb-images {
+                margin-top: 40px;
+                text-align: center;
+            }
+
+            .portfolio-brand {
+                color: #111;
+                padding: 15px 0;
+            }
+
+            #about .techno-about-thumb-box {
+                margin-bottom: 30px;
+            }
+
+            .portfolio-section {
+                padding: 60px 0;
+            }
+
+            #about .about-area,
+            #skills .service-area,
+            #goals .service-area,
+            #experience .career-details,
+            #contact .contact-us-area {
+                padding: 60px 0;
+            }
+        }
+
+        @@media (max-width: 767px) {
+            .section-title h2,
+            .dreamit-section-title h1 {
+                font-size: 28px;
+            }
+
+            #hero.slider-area.slider8 {
+                padding: 110px 0 60px;
+                text-align: center;
+            }
+
+            #hero .hero-actions,
+            #hero .hero-social {
+                justify-content: center;
+            }
+
+            #about .about-fact {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            #skills .techno-sinlge-service-box,
+            #skills .techno-sinlge-service-box-1,
+            #skills .techno-sinlge-service-box.active,
+            #goals .techno-sinlge-service-box,
+            #goals .techno-sinlge-service-box-1 {
+                min-height: 0;
+                margin-bottom: 20px;
+            }
+
+            #projects .portfolio-details-thumb img {
+                height: 180px;
+            }
+
+            #experience .experience-timeline {
+                padding-left: 26px;
+            }
+
+            #experience .experience-item {
+                padding: 20px 18px;
+            }
+
+            #experience .experience-item:before {
+                left: -24px;
+            }
+
+            #education .single-circular-box {
+                text-align: center;
+            }
+
+            #contact .contact-copy {
+                padding-right: 0;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            #contact .contact-links {
+                justify-content: center;
+            }
+
+            .certificate-modal button {
+                top: 12px;
+                right: 12px;
+                width: 38px;
+                height: 38px;
+                font-size: 20px;
+            }
+        }
+
+        @@media (max-width: 480px) {
+            #hero .slider-content h1 {
+                font-size: 32px !important;
+            }
+
+            .mean-container .mean-bar::before {
+                font-size: 14px;
+                max-width: 65%;
+            }
+        }
+    </style>
+}
+
+<section id="hero" class="slider-area slider8 d-flex align-items-center">
+    <div class="container">
+        <div class="row d-flex align-items-center slider">
+            <div class="col-lg-7 col-md-12 col-sm-12">
+                <div class="slider-content">
+                    <p class="section-kicker">Portfolio & Bewerbung</p>
+                    <h1>FRANCESCO</h1>
+                    <h1>LORENZO</h1>
+                    <h1><span class="color3">D'AMICO</span></h1>
+                    <p>
+                        Kurze persönliche Einleitung: Wer ich bin, worauf ich mich spezialisiere
+                        und welchen Mehrwert ich als Applikationsentwickler mitbringe.
+                    </p>
+                    <div class="hero-actions">
+                        <div class="slider-button2">
+                            <a href="#contact">KONTAKT AUFNEHMEN <i class="fas fa-check-square"></i></a>
+                        </div>
+                        <a class="hero-secondary" href="lebenslauf.pdf" target="_blank" rel="noopener">
+                            Lebenslauf (PDF)
+                        </a>
+                    </div>
+                    <div class="hero-social">
+                        <a href="#" target="_blank" rel="noopener">GitHub</a>
+                        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="mailto:deine-mail@example.com">E-Mail</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="slider-thumb-images">
+                    <img src="~/images/slider/image-b.png" alt="Portfolio Hero Bild">
+                </div>
+                <div class="slider-shape">
+                    <div class="shape-inner bounce-animate2">
+                        <img src="~/images/slider/shape1.png" alt="">
+                    </div>
+                    <div class="shape-inner-1 bounce-animate4">
+                        <img src="~/images/slider/shape2.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about">
+    <div class="about-area style-three">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="techno-about-thumb-box">
+                        <div class="techno-about-thumb-3">
+                            <img src="~/images/about/about1.png" alt="Über mich">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="row about-left">
+                        <div class="col-lg-12">
+                            <div class="dreamit-section-title style-four white">
+                                <h5>Über mich</h5>
+                                <h1>APPLIKATIONSENTWICKLUNG</h1>
+                                <h1>MIT <span class="color2">FOKUS</span></h1>
+                                <p class="pt-text">
+                                    Hier kommt dein persönlicher Über-mich-Text gemäss Mockup hinein.
+                                    Beschreibe kurz deinen Hintergrund, deine Arbeitsweise, Interessen
+                                    und welche Art von Projekten dich besonders motiviert.
+                                </p>
+                            </div>
+                            <div class="about-facts">
+                                <div class="about-fact"><strong>Schwerpunkt</strong><span>Applikationsentwicklung <i class="fas fa-angle-right"></i></span></div>
+                                <div class="about-fact"><strong>Arbeitsweise</strong><span>Strukturiert & lösungsorientiert <i class="fas fa-angle-right"></i></span></div>
+                                <div class="about-fact"><strong>Interesse</strong><span>Web & Software <i class="fas fa-angle-right"></i></span></div>
+                                <div class="about-fact"><strong>Portfolio</strong><span>Projekte ansehen <i class="fas fa-angle-right"></i></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="skills">
+    <div class="service-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 padding-left">
+                    <div class="dreamit-section-title text-left">
+                        <h5>Skills / Technologien</h5>
+                        <h1>MEINE TECHNISCHEN</h1>
+                        <h1><span>SKILLS</span></h1>
+                        <p>Die Bezeichnungen können später durch deine tatsächlichen Technologien ersetzt werden.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
+                    <div class="techno-sinlge-service-box">
+                        <div class="techno-service-box-inner">
+                            <div class="techno-service-content">
+                                <div class="techno-service-icon"><i class="flaticon-pen"></i></div>
+                                <div class="techno-service-title"><h2>Backend</h2><p>Technologien / Frameworks</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
+                    <div class="techno-sinlge-service-box-1">
+                        <div class="techno-service-box-inner">
+                            <div class="techno-service-content">
+                                <div class="techno-service-icon"><i class="flaticon-chat"></i></div>
+                                <div class="techno-service-title"><h2>Frontend</h2><p>Technologien / Frameworks</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
+                    <div class="techno-sinlge-service-box active">
+                        <div class="techno-service-box-inner">
+                            <div class="techno-service-content">
+                                <div class="techno-service-icon"><i class="flaticon-database"></i></div>
+                                <div class="techno-service-title"><h2>Datenbanken</h2><p>SQL / Datenmodellierung</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
+                    <div class="techno-sinlge-service-box">
+                        <div class="techno-service-box-inner">
+                            <div class="techno-service-content">
+                                <div class="techno-service-icon"><i class="flaticon-growth"></i></div>
+                                <div class="techno-service-title"><h2>Testing</h2><p>Qualität / Debugging</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
+                    <div class="techno-sinlge-service-box-1">
+                        <div class="techno-service-box-inner">
+                            <div class="techno-service-content">
+                                <div class="techno-service-icon"><i class="flaticon-clock"></i></div>
+                                <div class="techno-service-title"><h2>Git</h2><p>Versionsverwaltung</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
+                    <div class="techno-sinlge-service-box">
+                        <div class="techno-service-box-inner">
+                            <div class="techno-service-content">
+                                <div class="techno-service-icon"><i class="flaticon-settings"></i></div>
+                                <div class="techno-service-title"><h2>Tools</h2><p>IDE / Dev-Workflow</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="projects" class="portfolio-section">
+    <div class="container">
+        <div class="dreamit-section-title style-two text-center section-title">
+            <h5>Projekte</h5>
+            <h1>MEINE <span>PROJEKTE</span></h1>
+            <p>Vier Projektbeispiele gemäss Mockup. Inhalt, Bilder und Links werden später ersetzt.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <article class="project-card">
+                    <div class="portfolio-details-thumb"><img src="~/images/resource/prt1.jpg" alt="Projekt 1"></div>
+                    <div class="portfolio-details-titles">
+                        <h3>PROJEKT 01</h3><p>Kurzbeschreibung des Projekts und der wichtigsten Funktion.</p>
+                    </div>
+                    <div class="details-category"><h4>TECH:</h4><p>Technologien</p></div>
+                    <div class="project-actions"><a href="#">Projekt ansehen</a><a class="github" href="#">GitHub</a></div>
+                </article>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <article class="project-card">
+                    <div class="portfolio-details-thumb"><img src="~/images/resource/prt2.jpg" alt="Projekt 2"></div>
+                    <div class="portfolio-details-titles">
+                        <h3>PROJEKT 02</h3><p>Kurzbeschreibung des Projekts und der wichtigsten Funktion.</p>
+                    </div>
+                    <div class="details-category"><h4>TECH:</h4><p>Technologien</p></div>
+                    <div class="project-actions"><a href="#">Projekt ansehen</a><a class="github" href="#">GitHub</a></div>
+                </article>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <article class="project-card">
+                    <div class="portfolio-details-thumb"><img src="~/images/resource/prt3.jpg" alt="Projekt 3"></div>
+                    <div class="portfolio-details-titles">
+                        <h3>PROJEKT 03</h3><p>Kurzbeschreibung des Projekts und der wichtigsten Funktion.</p>
+                    </div>
+                    <div class="details-category"><h4>TECH:</h4><p>Technologien</p></div>
+                    <div class="project-actions"><a href="#">Projekt ansehen</a><a class="github" href="#">GitHub</a></div>
+                </article>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <article class="project-card">
+                    <div class="portfolio-details-thumb"><img src="~/images/resource/prt4.jpg" alt="Projekt 4"></div>
+                    <div class="portfolio-details-titles">
+                        <h3>PROJEKT 04</h3><p>Kurzbeschreibung des Projekts und der wichtigsten Funktion.</p>
+                    </div>
+                    <div class="details-category"><h4>TECH:</h4><p>Technologien</p></div>
+                    <div class="project-actions"><a href="#">Projekt ansehen</a><a class="github" href="#">GitHub</a></div>
+                </article>
+            </div>
+        </div>
+
+        <div class="text-center pt-30">
+            <div class="about-button"><a href="#">WEITERE PROJEKTE <i class="fas fa-check-square"></i></a></div>
+        </div>
+    </div>
+</section>
+
+<section id="goals">
+    <div class="service-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="dreamit-section-title text-center">
+                        <h5>Meine Ziele</h5>
+                        <h1>WAS ICH <span>ERREICHEN MÖCHTE</span></h1>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
+                    <div class="techno-sinlge-service-box">
+                        <div class="techno-service-box-inner">
+                            <div class="techno-service-content">
+                                <div class="techno-service-icon"><i class="flaticon-growth"></i></div>
+                                <div class="techno-service-title"><h2>Ziel 01</h2><p>Kurze Beschreibung des persönlichen oder beruflichen Ziels.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
+                    <div class="techno-sinlge-service-box-1">
+                        <div class="techno-service-box-inner">
+                            <div class="techno-service-content">
+                                <div class="techno-service-icon"><i class="flaticon-pen"></i></div>
+                                <div class="techno-service-title"><h2>Ziel 02</h2><p>Kurze Beschreibung des persönlichen oder beruflichen Ziels.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
+                    <div class="techno-sinlge-service-box active">
+                        <div class="techno-service-box-inner">
+                            <div class="techno-service-content">
+                                <div class="techno-service-icon"><i class="flaticon-chat"></i></div>
+                                <div class="techno-service-title"><h2>Ziel 03</h2><p>Kurze Beschreibung des persönlichen oder beruflichen Ziels.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
+                    <div class="techno-sinlge-service-box-1">
+                        <div class="techno-service-box-inner">
+                            <div class="techno-service-content">
+                                <div class="techno-service-icon"><i class="flaticon-clock"></i></div>
+                                <div class="techno-service-title"><h2>Ziel 04</h2><p>Kurze Beschreibung des persönlichen oder beruflichen Ziels.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="experience">
+    <div class="career-details">
+        <div class="container">
+            <div class="dreamit-section-title style-two text-center section-title">
+                <h5>Erfahrung</h5>
+                <h1>BERUFLICHE <span>ERFAHRUNG</span></h1>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="experience-timeline single-details-box">
+                        <article class="experience-item">
+                            <h3>Position / Tätigkeit 01</h3>
+                            <div class="experience-meta">Firma / Organisation · Zeitraum</div>
+                            <div class="details-text">
+                                <h4>Aufgaben & Verantwortlichkeiten:</h4>
+                                <p>Kurze Beschreibung der wichtigsten Aufgaben, Projekte und eingesetzten Technologien.</p>
+                            </div>
+                        </article>
+
+                        <article class="experience-item">
+                            <h3>Position / Tätigkeit 02</h3>
+                            <div class="experience-meta">Firma / Organisation · Zeitraum</div>
+                            <div class="details-text">
+                                <h4>Aufgaben & Verantwortlichkeiten:</h4>
+                                <p>Kurze Beschreibung der wichtigsten Aufgaben, Projekte und eingesetzten Technologien.</p>
+                            </div>
+                        </article>
+
+                        <article class="experience-item">
+                            <h3>Position / Tätigkeit 03</h3>
+                            <div class="experience-meta">Firma / Organisation · Zeitraum</div>
+                            <div class="details-text">
+                                <h4>Aufgaben & Verantwortlichkeiten:</h4>
+                                <p>Kurze Beschreibung der wichtigsten Aufgaben, Projekte und eingesetzten Technologien.</p>
+                            </div>
+                        </article>
+
+                        <article class="experience-item">
+                            <h3>Position / Tätigkeit 04</h3>
+                            <div class="experience-meta">Firma / Organisation · Zeitraum</div>
+                            <div class="details-text">
+                                <h4>Aufgaben & Verantwortlichkeiten:</h4>
+                                <p>Kurze Beschreibung der wichtigsten Aufgaben, Projekte und eingesetzten Technologien.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="text-center">
+                        <div class="about-button"><a href="#">MEHR ERFAHRUNG ANZEIGEN <i class="fas fa-check-square"></i></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="education" class="portfolio-section">
+    <div class="container">
+        <div class="dreamit-section-title style-two text-center section-title">
+            <h5>Bildung / Zertifikate</h5>
+            <h1>BILDUNG & <span>NACHWEISE</span></h1>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="single-circular-box">
+                    <div class="circular-thumb"><img src="~/images/resource/circular1.png" alt=""></div>
+                    <div class="circular-title">
+                        <h3>Ausbildung / Zeugnis</h3>
+                        <p>Institution, Abschluss und Zeitraum. Hier kommt die kurze Beschreibung hinein.</p>
+                    </div>
+                    <div class="circular-btn">
+                        <a href="~/images/resource/career-1.jpg" class="certificate-open">ZEUGNIS ANSEHEN</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="single-circular-box">
+                    <div class="circular-thumb"><img src="~/images/resource/circular2.png" alt=""></div>
+                    <div class="circular-title">
+                        <h3>Zertifikat / Weiterbildung</h3>
+                        <p>Anbieter, Zertifikat und Datum. Hier kommt die kurze Beschreibung hinein.</p>
+                    </div>
+                    <div class="circular-btn">
+                        <a href="~/images/resource/career-1.jpg" class="certificate-open">ZERTIFIKAT ANSEHEN</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="certificate-modal" id="certificateModal" aria-hidden="true">
+    <button type="button" id="certificateClose" aria-label="Schliessen">&times;</button>
+    <img id="certificateImage" src="" alt="Zertifikat oder Zeugnis">
+</div>
+
+<section id="contact">
+    <div class="contact-us-area style-two pt-100">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="dreamit-section-title style-two text-center">
+                        <h5>KONTAKT</h5>
+                        <h1>GET IN <span>TOUCH</span></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="row">
+
+                        <div class="col-lg-12">
+                            <div class="contact-us-single-box">
+                                <div class="contact-us-icon">
+                                    <i class="flaticon-suitcase"></i>
+                                </div>
+
+                                <div class="contact-us-title">
+                                    <h2>STANDORT</h2>
+                                    <p>Schweiz</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="contact-us-single-box">
+                                <div class="contact-us-icon">
+                                    <i class="flaticon-call"></i>
+                                </div>
+
+                                <div class="contact-us-title">
+                                    <h2>TELEFON</h2>
+                                    <p>+41 XX XXX XX XX</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="contact-us-single-box">
+                                <div class="contact-us-icon">
+                                    <i class="flaticon-communications"></i>
+                                </div>
+
+                                <div class="contact-us-title">
+                                    <h2>E-MAIL</h2>
+                                    <p>
+                                        <a href="mailto:deine-mail@example.com">
+                                            deine-mail@example.com
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-8 col-md-6 col-sm-12">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="contact-form-box style-two">
+
+                                <form action="https://formspree.io/f/myyleorq"
+                                      method="POST"
+                                      id="dreamit-form">
+
+                                    <h4>
+                                        Schreib mir eine Nachricht
+                                    </h4>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-title">
+                                                <p>Name (Pflichtfeld)</p>
+                                            </div>
+
+                                            <div class="from-box">
+                                                <input
+                                                    type="text"
+                                                    name="name"
+                                                    placeholder="Dein Name*"
+                                                    required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-title">
+                                                <p>E-Mail (Pflichtfeld)</p>
+                                            </div>
+
+                                            <div class="from-box">
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    placeholder="Deine E-Mail*"
+                                                    required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-title">
+                                                <p>Telefon (optional)</p>
+                                            </div>
+
+                                            <div class="from-box">
+                                                <input
+                                                    type="tel"
+                                                    name="phone"
+                                                    placeholder="Telefonnummer">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-title">
+                                                <p>Betreff</p>
+                                            </div>
+
+                                            <div class="from-box">
+                                                <input
+                                                    type="text"
+                                                    name="subject"
+                                                    placeholder="Betreff">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <div class="form-title">
+                                                <p>Nachricht</p>
+                                            </div>
+
+                                            <div class="from-box">
+                                                <textarea
+                                                    name="message"
+                                                    cols="30"
+                                                    rows="10"
+                                                    placeholder="Deine Nachricht*"
+                                                    required></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <div class="contact-form">
+                                                <button type="submit">
+                                                    NACHRICHT SENDEN
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        (function () {
+            var modal = document.getElementById("certificateModal");
+            var image = document.getElementById("certificateImage");
+            var close = document.getElementById("certificateClose");
+
+            document.querySelectorAll(".certificate-open").forEach(function (link) {
+                link.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    image.src = link.getAttribute("href");
+                    modal.classList.add("open");
+                    modal.setAttribute("aria-hidden", "false");
+                });
+            });
+
+            function closeModal() {
+                modal.classList.remove("open");
+                modal.setAttribute("aria-hidden", "true");
+                image.src = "";
+            }
+
+            close.addEventListener("click", closeModal);
+            modal.addEventListener("click", function (event) {
+                if (event.target === modal) closeModal();
+            });
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape") closeModal();
+            });
+        })();
+    </script>
+}
