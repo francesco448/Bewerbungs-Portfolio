@@ -939,9 +939,12 @@
 
                             <div class="contact-form-box style-two">
 
-                                <form action="https://formspree.io/f/myyleorq"
-                                      method="POST"
-                                      id="dreamit-form">
+                                @if (Model.ContactFormSubmitted)
+                                {
+                                    <div class="alert alert-success">Danke für deine Nachricht! Ich melde mich so schnell wie möglich.</div>
+                                }
+
+                                <form method="post" id="dreamit-form">
 
                                     <h4>
                                         Schreib mir eine Nachricht
