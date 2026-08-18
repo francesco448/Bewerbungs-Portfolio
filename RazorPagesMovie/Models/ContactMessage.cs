@@ -33,4 +33,6 @@ public class ContactMessage
     [Display(Name = "Gesendet am")]
     [DataType(DataType.DateTime)]
     public DateTime SentAt { get; set; } = DateTime.Now;
+
+    public bool NotificationSent { get; set; } = false;
 }
