@@ -6,7 +6,6 @@ public class ContactMessage
 {
     public int Id { get; set; }
 
-    [Display(Name = "Name")]
     [Required]
     [StringLength(100)]
     public string Name { get; set; } = string.Empty;
@@ -28,7 +27,7 @@ public class ContactMessage
 
     [Display(Name = "Nachricht")]
     [Required]
-    [StringLength(4000)]
+    [StringLength(5000)]
     public string Message { get; set; } = string.Empty;
 
     [Display(Name = "Gesendet am")]
