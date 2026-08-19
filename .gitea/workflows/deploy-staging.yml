@@ -31,3 +31,16 @@ jobs:
         run: |
           docker push francesco448/razorpagesmovie:${{ gitea.sha }}
           docker push francesco448/razorpagesmovie:staging
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.TRUENAS_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.TRUENAS_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy to Staging
+        run: |
+          ssh -i ~/.ssh/id_ed25519 \
+            "${{ secrets.TRUENAS_USER }}@${{ secrets.TRUENAS_HOST }}" \
+            "midclt call -j app.redeploy bewerbungs-portfolio-staging"
