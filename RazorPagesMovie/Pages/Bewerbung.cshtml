@@ -939,10 +939,7 @@
 
                             <div class="contact-form-box style-two">
 
-                                @if (Model.ContactFormSubmitted)
-                                {
-                                    <div class="alert alert-success">Danke für deine Nachricht! Ich melde mich so schnell wie möglich.</div>
-                                }
+                                <div id="contact-form-message" class="alert" role="alert" style="display:none;"></div>
 
                                 <form method="post" id="dreamit-form">
 
@@ -1071,6 +1068,52 @@
             });
             document.addEventListener("keydown", function (event) {
                 if (event.key === "Escape") closeModal();
+            });
+        })();
+
+        (function () {
+            var form = document.getElementById("dreamit-form");
+            var messageBox = document.getElementById("contact-form-message");
+            var submitButton = form.querySelector("button[type=submit]");
+
+            function showMessage(text, isSuccess) {
+                messageBox.textContent = text;
+                messageBox.className = "alert " + (isSuccess ? "alert-success" : "alert-danger");
+                messageBox.style.display = "block";
+            }
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                submitButton.disabled = true;
+
+                var payload = {
+                    name: form.querySelector("[name=name]").value,
+                    email: form.querySelector("[name=email]").value,
+                    phone: form.querySelector("[name=phone]").value,
+                    subject: form.querySelector("[name=subject]").value,
+                    message: form.querySelector("[name=message]").value
+                };
+
+                fetch("/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                })
+                    .then(function (response) {
+                        if (response.ok) {
+                            showMessage("Danke für deine Nachricht! Ich melde mich so schnell wie möglich.", true);
+                            form.reset();
+                        } else {
+                            showMessage("Beim Senden ist ein Fehler aufgetreten. Bitte versuche es erneut.", false);
+                        }
+                    })
+                    .catch(function () {
+                        showMessage("Beim Senden ist ein Fehler aufgetreten. Bitte versuche es erneut.", false);
+                    })
+                    .finally(function () {
+                        submitButton.disabled = false;
+                    });
             });
         })();
     </script>

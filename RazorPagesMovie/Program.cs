@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using RazorPagesMovie.Data;
@@ -47,4 +48,30 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
+
+app.MapPost("/api/contact", async (ContactMessageRequest request, RazorPagesMovieContext context) =>
+{
+    var contactMessage = new ContactMessage
+    {
+        Name = request.Name ?? string.Empty,
+        Email = request.Email ?? string.Empty,
+        Phone = request.Phone,
+        Subject = request.Subject,
+        Message = request.Message ?? string.Empty
+    };
+
+    var validationResults = new List<ValidationResult>();
+    if (!Validator.TryValidateObject(contactMessage, new ValidationContext(contactMessage), validationResults, validateAllProperties: true))
+    {
+        return Results.BadRequest(new { error = "Bitte alle Pflichtfelder korrekt ausfüllen." });
+    }
+
+    context.ContactMessage.Add(contactMessage);
+    await context.SaveChangesAsync();
+
+    return Results.Ok(new { success = true });
+});
+
 app.Run();
+
+record ContactMessageRequest(string? Name, string? Email, string? Phone, string? Subject, string? Message);
