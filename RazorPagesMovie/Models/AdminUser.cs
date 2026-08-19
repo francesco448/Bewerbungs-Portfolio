@@ -4,7 +4,7 @@ namespace RazorPagesMovie.Models;
 
 public class AdminUser
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     [Required]
     [StringLength(100)]
