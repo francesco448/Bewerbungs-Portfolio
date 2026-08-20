@@ -41,6 +41,7 @@ public class ContactMessageNotificationService : BackgroundService
 
         if (string.IsNullOrWhiteSpace(botToken) || string.IsNullOrWhiteSpace(chatId))
         {
+            _logger.LogWarning("Telegram:BotToken oder Telegram:ChatId ist nicht konfiguriert – Benachrichtigung wird übersprungen.");
             return;
         }
 
