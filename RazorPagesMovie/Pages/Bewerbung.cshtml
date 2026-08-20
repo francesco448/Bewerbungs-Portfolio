@@ -958,7 +958,7 @@
                                                 <input
                                                     type="text"
                                                     name="name"
-                                                    placeholder="Dein Name*"
+                                                    placeholder="Name*"
                                                     required>
                                             </div>
                                         </div>
@@ -972,7 +972,7 @@
                                                 <input
                                                     type="email"
                                                     name="email"
-                                                    placeholder="Deine E-Mail*"
+                                                    placeholder="E-Mail*"
                                                     required>
                                             </div>
                                         </div>
@@ -1013,7 +1013,7 @@
                                                     name="message"
                                                     cols="30"
                                                     rows="10"
-                                                    placeholder="Deine Nachricht*"
+                                                    placeholder="Nachricht*"
                                                     required></textarea>
                                             </div>
                                         </div>
@@ -1082,27 +1082,38 @@
                 messageBox.style.display = "block";
             }
 
+            function isValidPhone(value) {
+                if (!value) return true;
+                var digitCount = (value.match(/\d/g) || []).length;
+                return /^[0-9+\-\s()]+$/.test(value) && digitCount >= 7 && digitCount <= 15;
+            }
+
             form.addEventListener("submit", function (event) {
                 event.preventDefault();
-
-                submitButton.disabled = true;
 
                 var payload = {
                     name: form.querySelector("[name=name]").value,
                     email: form.querySelector("[name=email]").value,
-                    phone: form.querySelector("[name=phone]").value,
+                    phone: form.querySelector("[name=phone]").value.trim(),
                     subject: form.querySelector("[name=subject]").value,
                     message: form.querySelector("[name=message]").value
                 };
 
-                fetch("/api/contact", {
+                if (!isValidPhone(payload.phone)) {
+                    showMessage("Bitte gib eine gültige Telefonnummer ein.", false);
+                    return;
+                }
+
+                submitButton.disabled = true;
+
+                fetch("/api/v1/contact", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
                 })
                     .then(function (response) {
                         if (response.ok) {
-                            showMessage("Danke für deine Nachricht! Ich melde mich so schnell wie möglich.", true);
+                            showMessage("Danke für die Nachricht! Ich melde mich so schnell wie möglich.", true);
                             form.reset();
                         } else {
                             showMessage("Beim Senden ist ein Fehler aufgetreten. Bitte versuche es erneut.", false);
