@@ -941,7 +941,7 @@
 
                                 <div id="contact-form-message" class="alert" role="alert" style="display:none;"></div>
 
-                                <form method="post" id="dreamit-form">
+                                <form method="post" id="dreamit-form" novalidate>
 
                                     <h4>
                                         Haben Sie Fragen oder möchten Sie mit mir in Kontakt treten? Ich freue mich auf Ihre Nachricht.
@@ -960,6 +960,7 @@
                                                     name="name"
                                                     placeholder="Name*"
                                                     required>
+                                                <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
 
@@ -974,6 +975,7 @@
                                                     name="email"
                                                     placeholder="E-Mail*"
                                                     required>
+                                                <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
 
@@ -986,20 +988,23 @@
                                                 <input
                                                     type="tel"
                                                     name="phone"
-                                                    placeholder="Telefonnummer">
+                                                    placeholder="z. B. 079 123 45 67 oder +41 79 123 45 67">
+                                                <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
 
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-title">
-                                                <p>Betreff</p>
+                                                <p>Betreff (Pflichtfeld)</p>
                                             </div>
 
                                             <div class="from-box">
                                                 <input
                                                     type="text"
                                                     name="subject"
-                                                    placeholder="Betreff">
+                                                    placeholder="Betreff*"
+                                                    required>
+                                                <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
 
@@ -1015,6 +1020,7 @@
                                                     rows="10"
                                                     placeholder="Nachricht*"
                                                     required></textarea>
+                                                <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
 
@@ -1084,25 +1090,78 @@
 
             function isValidPhone(value) {
                 if (!value) return true;
-                var digitCount = (value.match(/\d/g) || []).length;
-                return /^[0-9+\-\s()]+$/.test(value) && digitCount >= 7 && digitCount <= 15;
+                return /^(?:\+41|0041|0)[\s-]?\d{2}(?:[\s-]?\d{3})(?:[\s-]?\d{2}){2}$/.test(value);
             }
+
+            function isValidEmail(value) {
+                return /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(value);
+            }
+
+            var validators = {
+                name: function (value) {
+                    return value.trim() ? "" : "Bitte geben Sie Ihren Namen ein.";
+                },
+                email: function (value) {
+                    if (!value.trim()) return "Bitte geben Sie Ihre E-Mail-Adresse ein.";
+                    return isValidEmail(value.trim()) ? "" : "Bitte geben Sie eine gültige E-Mail-Adresse ein.";
+                },
+                phone: function (value) {
+                    return isValidPhone(value.trim()) ? "" : "Bitte geben Sie eine gültige Telefonnummer ein.";
+                },
+                subject: function (value) {
+                    return value.trim() ? "" : "Bitte geben Sie einen Betreff ein.";
+                },
+                message: function (value) {
+                    return value.trim() ? "" : "Bitte geben Sie eine Nachricht ein.";
+                }
+            };
+
+            function fieldOf(name) {
+                return form.querySelector("[name=" + name + "]");
+            }
+
+            function validateField(name) {
+                var field = fieldOf(name);
+                var feedback = field.closest(".from-box").querySelector(".invalid-feedback");
+                var error = validators[name](field.value);
+
+                field.classList.toggle("is-invalid", !!error);
+                feedback.textContent = error;
+
+                return !error;
+            }
+
+            function validateAll() {
+                var allValid = true;
+                Object.keys(validators).forEach(function (name) {
+                    if (!validateField(name)) allValid = false;
+                });
+                return allValid;
+            }
+
+            Object.keys(validators).forEach(function (name) {
+                var field = fieldOf(name);
+                field.addEventListener("blur", function () { validateField(name); });
+                field.addEventListener("input", function () {
+                    if (field.classList.contains("is-invalid")) validateField(name);
+                });
+            });
 
             form.addEventListener("submit", function (event) {
                 event.preventDefault();
 
-                var payload = {
-                    name: form.querySelector("[name=name]").value,
-                    email: form.querySelector("[name=email]").value,
-                    phone: form.querySelector("[name=phone]").value.trim(),
-                    subject: form.querySelector("[name=subject]").value,
-                    message: form.querySelector("[name=message]").value
-                };
-
-                if (!isValidPhone(payload.phone)) {
-                    showMessage("Bitte gib eine gültige Telefonnummer ein.", false);
+                if (!validateAll()) {
+                    showMessage("Bitte korrigieren Sie die markierten Felder.", false);
                     return;
                 }
+
+                var payload = {
+                    name: fieldOf("name").value.trim(),
+                    email: fieldOf("email").value.trim(),
+                    phone: fieldOf("phone").value.trim(),
+                    subject: fieldOf("subject").value.trim(),
+                    message: fieldOf("message").value.trim()
+                };
 
                 submitButton.disabled = true;
 

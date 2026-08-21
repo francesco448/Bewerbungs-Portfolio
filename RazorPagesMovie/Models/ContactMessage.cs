@@ -22,8 +22,9 @@ public class ContactMessage
     public string? Phone { get; set; }
 
     [Display(Name = "Betreff")]
+    [Required]
     [StringLength(150)]
-    public string? Subject { get; set; }
+    public string Subject { get; set; } = string.Empty;
 
     [Display(Name = "Nachricht")]
     [Required]

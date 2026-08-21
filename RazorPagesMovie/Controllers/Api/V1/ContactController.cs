@@ -18,7 +18,7 @@ public class ContactController(RazorPagesMovieContext context) : ControllerBase
             Name = request.Name ?? string.Empty,
             Email = request.Email ?? string.Empty,
             Phone = request.Phone,
-            Subject = request.Subject,
+            Subject = request.Subject ?? string.Empty,
             Message = request.Message ?? string.Empty
         };
 
