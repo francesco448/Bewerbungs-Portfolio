@@ -12,6 +12,7 @@ public class ContactMessageNotificationService : BackgroundService
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly IConfiguration _configuration;
     private readonly IContactMessageNotificationQueue _queue;
+    private readonly IHostEnvironment _hostEnvironment;
     private readonly ILogger<ContactMessageNotificationService> _logger;
 
     public ContactMessageNotificationService(
@@ -19,12 +20,14 @@ public class ContactMessageNotificationService : BackgroundService
         IHttpClientFactory httpClientFactory,
         IConfiguration configuration,
         IContactMessageNotificationQueue queue,
+        IHostEnvironment hostEnvironment,
         ILogger<ContactMessageNotificationService> logger)
     {
         _scopeFactory = scopeFactory;
         _httpClientFactory = httpClientFactory;
         _configuration = configuration;
         _queue = queue;
+        _hostEnvironment = hostEnvironment;
         _logger = logger;
     }
 
@@ -105,7 +108,7 @@ public class ContactMessageNotificationService : BackgroundService
             return;
         }
 
-        var text = $"Neue Kontaktanfrage von {eintrag.Name}\n"
+        var text = $"[{GetEnvironmentTag()}] Neue Kontaktanfrage von {eintrag.Name}\n"
             + $"E-Mail: {eintrag.Email}\n"
             + (string.IsNullOrWhiteSpace(eintrag.Phone) ? "" : $"Telefon: {eintrag.Phone}\n")
             + (string.IsNullOrWhiteSpace(eintrag.Subject) ? "" : $"Betreff: {eintrag.Subject}\n")
@@ -136,4 +139,12 @@ public class ContactMessageNotificationService : BackgroundService
             _logger.LogError(ex, "Telegram-Versand fehlgeschlagen für ContactMessage {Id}", eintrag.Id);
         }
     }
+
+    private string GetEnvironmentTag() => _hostEnvironment.EnvironmentName switch
+    {
+        "Development" => "DEV",
+        "Staging" => "TEST",
+        "Production" => "PROD",
+        var other => other.ToUpperInvariant()
+    };
 }
