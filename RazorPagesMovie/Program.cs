@@ -29,6 +29,7 @@ builder.Services.AddRazorPages(options =>
 builder.Services.AddControllers();
 
 builder.Services.AddHttpClient();
+builder.Services.AddSingleton<IContactMessageNotificationQueue, ContactMessageNotificationQueue>();
 builder.Services.AddHostedService<ContactMessageNotificationService>();
 
 var app = builder.Build();

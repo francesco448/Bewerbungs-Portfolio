@@ -6,35 +6,86 @@ namespace RazorPagesMovie.Services;
 
 public class ContactMessageNotificationService : BackgroundService
 {
-    private static readonly TimeSpan CheckInterval = TimeSpan.FromMinutes(5);
+    private static readonly TimeSpan FallbackSweepInterval = TimeSpan.FromMinutes(2);
 
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly IConfiguration _configuration;
+    private readonly IContactMessageNotificationQueue _queue;
     private readonly ILogger<ContactMessageNotificationService> _logger;
 
     public ContactMessageNotificationService(
         IServiceScopeFactory scopeFactory,
         IHttpClientFactory httpClientFactory,
         IConfiguration configuration,
+        IContactMessageNotificationQueue queue,
         ILogger<ContactMessageNotificationService> logger)
     {
         _scopeFactory = scopeFactory;
         _httpClientFactory = httpClientFactory;
         _configuration = configuration;
+        _queue = queue;
         _logger = logger;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        while (!stoppingToken.IsCancellationRequested)
+        var consumerTask = ConsumeQueueAsync(stoppingToken);
+        var fallbackSweepTask = RunFallbackSweepAsync(stoppingToken);
+
+        await Task.WhenAll(consumerTask, fallbackSweepTask);
+    }
+
+    private async Task ConsumeQueueAsync(CancellationToken stoppingToken)
+    {
+        await foreach (var contactMessageId in _queue.DequeueAllAsync(stoppingToken))
         {
-            await CheckForNewContactMessagesAsync(stoppingToken);
-            await Task.Delay(CheckInterval, stoppingToken);
+            try
+            {
+                await SendNotificationAsync(contactMessageId, stoppingToken);
+            }
+            finally
+            {
+                _queue.Release(contactMessageId);
+            }
         }
     }
 
-    private async Task CheckForNewContactMessagesAsync(CancellationToken stoppingToken)
+    private async Task RunFallbackSweepAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            await EnqueueUnsentFromDatabaseAsync(stoppingToken);
+
+            try
+            {
+                await Task.Delay(FallbackSweepInterval, stoppingToken);
+            }
+            catch (OperationCanceledException)
+            {
+                // Dienst wird beendet.
+            }
+        }
+    }
+
+    private async Task EnqueueUnsentFromDatabaseAsync(CancellationToken stoppingToken)
+    {
+        using var scope = _scopeFactory.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<RazorPagesMovieContext>();
+
+        var offeneIds = await context.ContactMessage
+            .Where(c => !c.NotificationSent)
+            .OrderBy(c => c.SentAt)
+            .Select(c => c.Id)
+            .ToListAsync(stoppingToken);
+
+        foreach (var id in offeneIds)
+        {
+            _queue.Enqueue(id);
+        }
+    }
+
+    private async Task SendNotificationAsync(Guid contactMessageId, CancellationToken stoppingToken)
     {
         var botToken = _configuration["Telegram:BotToken"];
         var chatId = _configuration["Telegram:ChatId"];
@@ -48,48 +99,41 @@ public class ContactMessageNotificationService : BackgroundService
         using var scope = _scopeFactory.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<RazorPagesMovieContext>();
 
-        var neueEintraege = await context.ContactMessage
-            .Where(c => !c.NotificationSent)
-            .OrderBy(c => c.SentAt)
-            .ToListAsync(stoppingToken);
-
-        if (neueEintraege.Count == 0)
+        var eintrag = await context.ContactMessage.FindAsync(new object?[] { contactMessageId }, stoppingToken);
+        if (eintrag is null || eintrag.NotificationSent)
         {
             return;
         }
 
+        var text = $"Neue Kontaktanfrage von {eintrag.Name}\n"
+            + $"E-Mail: {eintrag.Email}\n"
+            + (string.IsNullOrWhiteSpace(eintrag.Phone) ? "" : $"Telefon: {eintrag.Phone}\n")
+            + (string.IsNullOrWhiteSpace(eintrag.Subject) ? "" : $"Betreff: {eintrag.Subject}\n")
+            + $"\n{eintrag.Message}";
+
         var httpClient = _httpClientFactory.CreateClient();
         var sendMessageUrl = $"https://api.telegram.org/bot{botToken}/sendMessage";
 
-        foreach (var eintrag in neueEintraege)
+        try
         {
-            var text = $"Neue Kontaktanfrage von {eintrag.Name}\n"
-                + $"E-Mail: {eintrag.Email}\n"
-                + (string.IsNullOrWhiteSpace(eintrag.Phone) ? "" : $"Telefon: {eintrag.Phone}\n")
-                + (string.IsNullOrWhiteSpace(eintrag.Subject) ? "" : $"Betreff: {eintrag.Subject}\n")
-                + $"\n{eintrag.Message}";
+            var response = await httpClient.PostAsJsonAsync(
+                sendMessageUrl,
+                new { chat_id = chatId, text },
+                stoppingToken);
 
-            try
+            if (response.IsSuccessStatusCode)
             {
-                var response = await httpClient.PostAsJsonAsync(
-                    sendMessageUrl,
-                    new { chat_id = chatId, text },
-                    stoppingToken);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    eintrag.NotificationSent = true;
-                    await context.SaveChangesAsync(stoppingToken);
-                }
-                else
-                {
-                    _logger.LogWarning("Telegram-Versand fehlgeschlagen für ContactMessage {Id}: {StatusCode}", eintrag.Id, response.StatusCode);
-                }
+                eintrag.NotificationSent = true;
+                await context.SaveChangesAsync(stoppingToken);
             }
-            catch (Exception ex)
+            else
             {
-                _logger.LogError(ex, "Telegram-Versand fehlgeschlagen für ContactMessage {Id}", eintrag.Id);
+                _logger.LogWarning("Telegram-Versand fehlgeschlagen für ContactMessage {Id}: {StatusCode}", eintrag.Id, response.StatusCode);
             }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Telegram-Versand fehlgeschlagen für ContactMessage {Id}", eintrag.Id);
         }
     }
 }

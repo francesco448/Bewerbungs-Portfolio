@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using RazorPagesMovie.Api.V1.Contact;
 using RazorPagesMovie.Data;
 using RazorPagesMovie.Models;
+using RazorPagesMovie.Services;
 
 namespace RazorPagesMovie.Controllers.Api.V1;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-public class ContactController(RazorPagesMovieContext context) : ControllerBase
+public class ContactController(RazorPagesMovieContext context, IContactMessageNotificationQueue notificationQueue) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> Post(ContactDto request)
@@ -30,6 +31,8 @@ public class ContactController(RazorPagesMovieContext context) : ControllerBase
 
         context.ContactMessage.Add(contactMessage);
         await context.SaveChangesAsync();
+
+        notificationQueue.Enqueue(contactMessage.Id);
 
         return Ok(new { success = true });
     }
