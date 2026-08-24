@@ -85,6 +85,16 @@
             line-height: 1.05;
         }
 
+        #hero .slider-thumb-images {
+            margin-left: 40px;
+        }
+
+        #hero .slider-thumb-images img {
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        }
+
         #hero .hero-actions {
             display: flex;
             gap: 12px;
@@ -160,14 +170,21 @@
                 color: #0c5adb;
             }
 
-        #skills .service-area {
-            padding: 90px 0;
+        #skills .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #skills .skills-grid > div {
+            margin-bottom: 30px;
+            display: flex;
         }
 
         #skills .techno-sinlge-service-box,
         #skills .techno-sinlge-service-box-1,
         #skills .techno-sinlge-service-box.active {
-            min-height: 210px;
+            min-height: 220px;
+            width: 100%;
         }
 
         #skills .techno-service-title p {
@@ -215,13 +232,42 @@
                     background: #171717;
                 }
 
+        #projects .details-category h4 {
+            margin-top: 12px;
+            margin-bottom: 2px;
+        }
+
+        #projects .details-category h4:first-child {
+            margin-top: 0;
+        }
+
+        #projects .project-card-expanded .portfolio-details-thumb {
+            height: 100%;
+        }
+
+            #projects .project-card-expanded .portfolio-details-thumb img {
+                height: 100%;
+                min-height: 260px;
+            }
+
         #goals .service-area {
             padding: 90px 0;
+        }
+
+        #goals .goals-grid {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #goals .goals-grid > div {
+            margin-bottom: 30px;
+            display: flex;
         }
 
         #goals .techno-sinlge-service-box,
         #goals .techno-sinlge-service-box-1 {
             min-height: 220px;
+            width: 100%;
         }
 
         #experience .career-details {
@@ -273,54 +319,30 @@
             margin-bottom: 12px;
         }
 
-        #education .single-circular-box {
-            margin-bottom: 20px;
+        #documents .documents-grid {
+            display: flex;
+            flex-wrap: wrap;
         }
 
-        #education .circular-btn {
+        #documents .documents-grid > div {
+            margin-bottom: 30px;
+            display: flex;
+        }
+
+        #documents .single-circular-box {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 0;
+        }
+
+        #documents .circular-btn {
             position: static;
             text-align: left;
             margin-top: 14px;
             clear: both;
         }
-
-        #education .circular-btn a {
-            cursor: pointer;
-        }
-
-        .certificate-modal {
-            display: none;
-            position: fixed;
-            z-index: 99999;
-            inset: 0;
-            background: rgba(0,0,0,.88);
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-        }
-
-            .certificate-modal.open {
-                display: flex;
-            }
-
-            .certificate-modal img {
-                max-width: 92vw;
-                max-height: 86vh;
-                box-shadow: 0 10px 60px rgba(0,0,0,.5);
-            }
-
-            .certificate-modal button {
-                position: absolute;
-                top: 22px;
-                right: 28px;
-                background: #fff;
-                border: 0;
-                border-radius: 50%;
-                width: 44px;
-                height: 44px;
-                font-size: 25px;
-                cursor: pointer;
-            }
 
         #contact .contact-us-area {
             padding: 90px 0;
@@ -396,7 +418,6 @@
             }
 
             #about .about-area,
-            #skills .service-area,
             #goals .service-area,
             #experience .career-details,
             #contact .contact-us-area {
@@ -450,7 +471,7 @@
                 left: -24px;
             }
 
-            #education .single-circular-box {
+            #documents .single-circular-box {
                 text-align: center;
             }
 
@@ -464,13 +485,6 @@
                 justify-content: center;
             }
 
-            .certificate-modal button {
-                top: 12px;
-                right: 12px;
-                width: 38px;
-                height: 38px;
-                font-size: 20px;
-            }
         }
 
         @@media (max-width: 480px) {
@@ -491,32 +505,36 @@
         <div class="row d-flex align-items-center slider">
             <div class="col-lg-7 col-md-12 col-sm-12">
                 <div class="slider-content">
-                    <p class="section-kicker">Portfolio & Bewerbung</p>
+                    <p class="section-kicker">Applikationsentwickler</p>
                     <h1>FRANCESCO</h1>
                     <h1>LORENZO</h1>
                     <h1><span class="color3">D'AMICO</span></h1>
                     <p>
-                        Kurze persönliche Einleitung: Wer ich bin, worauf ich mich spezialisiere
-                        und welchen Mehrwert ich als Applikationsentwickler mitbringe.
+                        Ich entwickle gerne Anwendungen, bei denen aus einer Idee Schritt für Schritt eine
+                        funktionierende Lösung entsteht. Auf dieser Seite zeige ich ausgewählte Projekte,
+                        Technologien, mit denen ich bereits gearbeitet habe, und was ich bisher in der
+                        Applikationsentwicklung gelernt habe.
                     </p>
                     <div class="hero-actions">
                         <div class="slider-button2">
-                            <a href="#contact">KONTAKT AUFNEHMEN <i class="fas fa-check-square"></i></a>
+                            <a href="#projects">PROJEKTE ANSEHEN <i class="fas fa-check-square"></i></a>
                         </div>
-                        <a class="hero-secondary" href="lebenslauf.pdf" target="_blank" rel="noopener">
-                            Lebenslauf (PDF)
+                        <a class="hero-secondary" href="#contact">
+                            Kontakt aufnehmen
+                        </a>
+                        <a class="hero-secondary" href="~/documents/Lebenslauf_kreis_final.pdf" target="_blank" rel="noopener">
+                            Curriculum Vitae (PDF)
                         </a>
                     </div>
                     <div class="hero-social">
-                        <a href="#" target="_blank" rel="noopener">GitHub</a>
-                        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
-                        <a href="mailto:deine-mail@example.com">E-Mail</a>
+                        <a href="https://www.linkedin.com/in/francesco-d-amico-342b61356/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="mailto:Francescodamico649@gmail.com">E-Mail</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-5">
                 <div class="slider-thumb-images">
-                    <img src="~/images/slider/image-b.png" alt="Portfolio Hero Bild">
+                    <img src="~/images/resource/Bewerbung_Foto.jpeg" alt="Francesco Lorenzo D'Amico">
                 </div>
                 <div class="slider-shape">
                     <div class="shape-inner bounce-animate2">
@@ -538,7 +556,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="techno-about-thumb-box">
                         <div class="techno-about-thumb-3">
-                            <img src="~/images/about/about1.png" alt="Über mich">
+                            <img src="~/images/about/my-personal-workspace.jpg" alt="Über mich">
                         </div>
                     </div>
                 </div>
@@ -548,18 +566,20 @@
                             <div class="dreamit-section-title style-four white">
                                 <h5>Über mich</h5>
                                 <h1>APPLIKATIONSENTWICKLUNG</h1>
-                                <h1>MIT <span class="color2">FOKUS</span></h1>
+                                <h1>MIT <span class="color2">NEUGIER</span></h1>
                                 <p class="pt-text">
-                                    Hier kommt dein persönlicher Über-mich-Text gemäss Mockup hinein.
-                                    Beschreibe kurz deinen Hintergrund, deine Arbeitsweise, Interessen
-                                    und welche Art von Projekten dich besonders motiviert.
+                                    Mich fasziniert an der Softwareentwicklung, dass aus einer Idee Schritt für
+                                    Schritt eine funktionierende Anwendung entsteht. Dabei möchte ich nicht nur
+                                    wissen, dass etwas funktioniert, sondern auch verstehen, warum. Ich arbeite
+                                    gerne strukturiert, probiere neue Technologien aus und verbessere Lösungen
+                                    iterativ.
                                 </p>
                             </div>
                             <div class="about-facts">
-                                <div class="about-fact"><strong>Schwerpunkt</strong><span>Applikationsentwicklung <i class="fas fa-angle-right"></i></span></div>
+                                <div class="about-fact"><strong>Denkweise</strong><span>Produktorientiert & zukunftsgerichtet <i class="fas fa-angle-right"></i></span></div>
                                 <div class="about-fact"><strong>Arbeitsweise</strong><span>Strukturiert & lösungsorientiert <i class="fas fa-angle-right"></i></span></div>
-                                <div class="about-fact"><strong>Interesse</strong><span>Web & Software <i class="fas fa-angle-right"></i></span></div>
-                                <div class="about-fact"><strong>Portfolio</strong><span>Projekte ansehen <i class="fas fa-angle-right"></i></span></div>
+                                <div class="about-fact"><strong>Interessen</strong><span>Moderne Technologien & Trends <i class="fas fa-angle-right"></i></span></div>
+                                <div class="about-fact"><strong>Lernhaltung</strong><span>Neugier & praxisorientiert <i class="fas fa-angle-right"></i></span></div>
                             </div>
                         </div>
                     </div>
@@ -569,81 +589,76 @@
     </div>
 </section>
 
-<section id="skills">
-    <div class="service-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 padding-left">
-                    <div class="dreamit-section-title text-left">
-                        <h5>Skills / Technologien</h5>
-                        <h1>MEINE TECHNISCHEN</h1>
-                        <h1><span>SKILLS</span></h1>
-                        <p>Die Bezeichnungen können später durch deine tatsächlichen Technologien ersetzt werden.</p>
-                    </div>
-                </div>
+<section id="skills" class="portfolio-section">
+    <div class="container">
+        <div class="dreamit-section-title style-two text-center section-title">
+            <h5>Kompetenzen</h5>
+            <h1>MEINE TECHNISCHEN <span>SKILLS</span></h1>
+            <p>Technologien und Arbeitsweisen, mit denen ich bereits gearbeitet habe.</p>
+        </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
-                    <div class="techno-sinlge-service-box">
-                        <div class="techno-service-box-inner">
-                            <div class="techno-service-content">
-                                <div class="techno-service-icon"><i class="flaticon-pen"></i></div>
-                                <div class="techno-service-title"><h2>Backend</h2><p>Technologien / Frameworks</p></div>
-                            </div>
+        <div class="row skills-grid">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="techno-sinlge-service-box">
+                    <div class="techno-service-box-inner">
+                        <div class="techno-service-content">
+                            <div class="techno-service-icon"><i class="flaticon-pen"></i></div>
+                            <div class="techno-service-title"><h2>Backend</h2><p>ASP.NET Core · Entity Framework Core · REST APIs · C# · PHP · Symfony</p></div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
-                    <div class="techno-sinlge-service-box-1">
-                        <div class="techno-service-box-inner">
-                            <div class="techno-service-content">
-                                <div class="techno-service-icon"><i class="flaticon-chat"></i></div>
-                                <div class="techno-service-title"><h2>Frontend</h2><p>Technologien / Frameworks</p></div>
-                            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="techno-sinlge-service-box-1">
+                    <div class="techno-service-box-inner">
+                        <div class="techno-service-content">
+                            <div class="techno-service-icon"><i class="flaticon-chat"></i></div>
+                            <div class="techno-service-title"><h2>Frontend</h2><p>React · SASS · Symfony-Twig · PHP Bootstrap</p></div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
-                    <div class="techno-sinlge-service-box active">
-                        <div class="techno-service-box-inner">
-                            <div class="techno-service-content">
-                                <div class="techno-service-icon"><i class="flaticon-database"></i></div>
-                                <div class="techno-service-title"><h2>Datenbanken</h2><p>SQL / Datenmodellierung</p></div>
-                            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="techno-sinlge-service-box active">
+                    <div class="techno-service-box-inner">
+                        <div class="techno-service-content">
+                            <div class="techno-service-icon"><i class="flaticon-database"></i></div>
+                            <div class="techno-service-title"><h2>DB</h2><p>MongoDB · MS SQL Server</p></div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
-                    <div class="techno-sinlge-service-box">
-                        <div class="techno-service-box-inner">
-                            <div class="techno-service-content">
-                                <div class="techno-service-icon"><i class="flaticon-growth"></i></div>
-                                <div class="techno-service-title"><h2>Testing</h2><p>Qualität / Debugging</p></div>
-                            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="techno-sinlge-service-box">
+                    <div class="techno-service-box-inner">
+                        <div class="techno-service-content">
+                            <div class="techno-service-icon"><i class="flaticon-settings"></i></div>
+                            <div class="techno-service-title"><h2>Systeme</h2><p>Docker · TrueNAS · Webhosting-Grundlagen</p></div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
-                    <div class="techno-sinlge-service-box-1">
-                        <div class="techno-service-box-inner">
-                            <div class="techno-service-content">
-                                <div class="techno-service-icon"><i class="flaticon-clock"></i></div>
-                                <div class="techno-service-title"><h2>Git</h2><p>Versionsverwaltung</p></div>
-                            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="techno-sinlge-service-box-1">
+                    <div class="techno-service-box-inner">
+                        <div class="techno-service-content">
+                            <div class="techno-service-icon"><i class="flaticon-growth"></i></div>
+                            <div class="techno-service-title"><h2>AI</h2><p>Prompting · Code-Unterstützung · Recherche</p></div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
-                    <div class="techno-sinlge-service-box">
-                        <div class="techno-service-box-inner">
-                            <div class="techno-service-content">
-                                <div class="techno-service-icon"><i class="flaticon-settings"></i></div>
-                                <div class="techno-service-title"><h2>Tools</h2><p>IDE / Dev-Workflow</p></div>
-                            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="techno-sinlge-service-box">
+                    <div class="techno-service-box-inner">
+                        <div class="techno-service-content">
+                            <div class="techno-service-icon"><i class="flaticon-clock"></i></div>
+                            <div class="techno-service-title"><h2>Soft Skills</h2><p>Strukturiertes Arbeiten · Lernbereitschaft · selbstständige Fehlersuche · Zuverlässigkeit</p></div>
                         </div>
                     </div>
                 </div>
@@ -657,57 +672,72 @@
         <div class="dreamit-section-title style-two text-center section-title">
             <h5>Projekte</h5>
             <h1>MEINE <span>PROJEKTE</span></h1>
-            <p>Vier Projektbeispiele gemäss Mockup. Inhalt, Bilder und Links werden später ersetzt.</p>
         </div>
 
         <div class="row">
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-6 col-md-6">
                 <article class="project-card">
-                    <div class="portfolio-details-thumb"><img src="~/images/resource/prt1.jpg" alt="Projekt 1"></div>
+                    <div class="portfolio-details-thumb"><img src="~/images/projects/Screenshot 2026-08-24 153904.png" alt="Francesco's Recipes World"></div>
                     <div class="portfolio-details-titles">
-                        <h3>PROJEKT 01</h3><p>Kurzbeschreibung des Projekts und der wichtigsten Funktion.</p>
+                        <h3>Francesco's Recipes World</h3>
+                        <p>Full-Stack-Rezeptverwaltung zum Erstellen, Bearbeiten und Kategorisieren von Rezepten, Zutaten und Einheiten. Die Anwendung basiert auf einer strukturierten MVC-Architektur und relationaler Datenmodellierung.</p>
                     </div>
-                    <div class="details-category"><h4>TECH:</h4><p>Technologien</p></div>
-                    <div class="project-actions"><a href="#">Projekt ansehen</a><a class="github" href="#">GitHub</a></div>
+                    <div class="details-category">
+                        <h4>TECH:</h4><p>C# · ASP.NET Core MVC · Entity Framework Core · JavaScript · AJAX</p>
+                        <h4>Meine Arbeit:</h4><p>Datenmodellierung, Controller- und Geschäftslogik, Razor-Views, CRUD-Funktionen sowie AJAX-Integration umgesetzt.</p>
+                    </div>
+                    <div class="project-actions"><a href="https://francescos-rezepten-tool.francesco-damico.ch/" target="_blank" rel="noopener">Projekt ansehen</a><a class="github" href="https://github.com/francesco448/Francescos.Recipes.World" target="_blank" rel="noopener">GitHub</a></div>
                 </article>
             </div>
 
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-6 col-md-6">
                 <article class="project-card">
-                    <div class="portfolio-details-thumb"><img src="~/images/resource/prt2.jpg" alt="Projekt 2"></div>
+                    <div class="portfolio-details-thumb"><img src="~/images/projects/Screenshot 2026-08-24 154143.png" alt="Realtime Chat App"></div>
                     <div class="portfolio-details-titles">
-                        <h3>PROJEKT 02</h3><p>Kurzbeschreibung des Projekts und der wichtigsten Funktion.</p>
+                        <h3>Realtime Chat App</h3>
+                        <p>Echtzeit-Chat-Anwendung mit React-Frontend, Node.js-Backend und persistenter Datenspeicherung. Nachrichten und Räume werden über Socket.IO in Echtzeit synchronisiert.</p>
                     </div>
-                    <div class="details-category"><h4>TECH:</h4><p>Technologien</p></div>
-                    <div class="project-actions"><a href="#">Projekt ansehen</a><a class="github" href="#">GitHub</a></div>
-                </article>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <article class="project-card">
-                    <div class="portfolio-details-thumb"><img src="~/images/resource/prt3.jpg" alt="Projekt 3"></div>
-                    <div class="portfolio-details-titles">
-                        <h3>PROJEKT 03</h3><p>Kurzbeschreibung des Projekts und der wichtigsten Funktion.</p>
+                    <div class="details-category">
+                        <h4>TECH:</h4><p>React · Node.js · Express · Socket.IO · MongoDB · Docker</p>
+                        <h4>Meine Arbeit:</h4><p>Frontend und Backend umgesetzt, Echtzeitkommunikation integriert, Datenhaltung angebunden und Anwendung mit Docker containerisiert.</p>
                     </div>
-                    <div class="details-category"><h4>TECH:</h4><p>Technologien</p></div>
-                    <div class="project-actions"><a href="#">Projekt ansehen</a><a class="github" href="#">GitHub</a></div>
-                </article>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <article class="project-card">
-                    <div class="portfolio-details-thumb"><img src="~/images/resource/prt4.jpg" alt="Projekt 4"></div>
-                    <div class="portfolio-details-titles">
-                        <h3>PROJEKT 04</h3><p>Kurzbeschreibung des Projekts und der wichtigsten Funktion.</p>
-                    </div>
-                    <div class="details-category"><h4>TECH:</h4><p>Technologien</p></div>
-                    <div class="project-actions"><a href="#">Projekt ansehen</a><a class="github" href="#">GitHub</a></div>
+                    <div class="project-actions"><a href="https://chatapp.francesco-damico.ch/" target="_blank" rel="noopener">Projekt ansehen</a><a class="github" href="https://github.com/francesco448/chat-app" target="_blank" rel="noopener">GitHub</a></div>
                 </article>
             </div>
         </div>
 
-        <div class="text-center pt-30">
-            <div class="about-button"><a href="#">WEITERE PROJEKTE <i class="fas fa-check-square"></i></a></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <article class="project-card project-card-expanded">
+                    <div class="row align-items-stretch g-0">
+                        <div class="col-lg-5">
+                            <div class="portfolio-details-thumb"><img src="~/images/projects/Screenshot 2026-08-24 175017.png" alt="TrueNAS SCALE Dashboard"></div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="portfolio-details-titles">
+                                <h3>Homelab / Self-Hosting</h3>
+                                <p><strong>Ziel:</strong> Aufbau einer eigenen Hosting-Umgebung, um Anwendungen und Dienste selbst zu betreiben und praktische Erfahrung mit Infrastruktur, Netzwerken und Deployment zu sammeln.</p>
+                            </div>
+                            <div class="details-category">
+                                <h4>Hardware / System:</h4>
+                                <p>TrueNAS SCALE · Intel Core i5-6600 @@ 3.30 GHz · 4 Kerne / 4 Threads · 16 GB RAM · ZFS-Speicherpool mit RAIDZ1 aus 3 HDDs · 1 Gbit Ethernet / Full Duplex</p>
+
+                                <h4>Services:</h4>
+                                <p>Nginx Proxy Manager · Duplicati · Gitea · Scrutiny · Planka sowie selbst gehostete eigene Anwendungen wie Realtime Chat App, Francesco's Recipes World und Razor Pages Movie App</p>
+
+                                <h4>Sicherheit:</h4>
+                                <p>HTTPS für öffentlich erreichbare Dienste · Reverse Proxy über Nginx Proxy Manager · DNS-basierte Weiterleitung · getrennte Container und Services · Backup-Lösung mit Duplicati</p>
+
+                                <h4>Meine Arbeit:</h4>
+                                <p>Planung und Einrichtung der Homelab-Umgebung, Konfiguration von TrueNAS SCALE, Aufbau des ZFS-/RAIDZ1-Speichers, Deployment und Verwaltung von Docker-Containern über Custom Apps und YAML, Einrichtung von Nginx Proxy Manager, DNS und HTTPS sowie Betrieb eigener Webanwendungen und Datenbanken.</p>
+
+                                <h4>Gelernt:</h4>
+                                <p>Docker und Container Networking · YAML-basierte Deployments · Reverse Proxy · DNS · HTTPS · ZFS und RAIDZ1 · Self-Hosting · Deployment eigener Anwendungen · Backup-Konzept · Fehleranalyse und Troubleshooting</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </div>
     </div>
 </section>
@@ -723,45 +753,48 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
+            </div>
+
+            <div class="row goals-grid">
+                <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="techno-sinlge-service-box">
                         <div class="techno-service-box-inner">
                             <div class="techno-service-content">
                                 <div class="techno-service-icon"><i class="flaticon-growth"></i></div>
-                                <div class="techno-service-title"><h2>Ziel 01</h2><p>Kurze Beschreibung des persönlichen oder beruflichen Ziels.</p></div>
+                                <div class="techno-service-title"><h2>Praxis vertiefen</h2><p>Meine bisherigen Kenntnisse in echten Projekten anwenden, Verantwortung übernehmen und mich fachlich weiterentwickeln.</p></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
+                <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="techno-sinlge-service-box-1">
                         <div class="techno-service-box-inner">
                             <div class="techno-service-content">
                                 <div class="techno-service-icon"><i class="flaticon-pen"></i></div>
-                                <div class="techno-service-title"><h2>Ziel 02</h2><p>Kurze Beschreibung des persönlichen oder beruflichen Ziels.</p></div>
+                                <div class="techno-service-title"><h2>Moderne Technologien einsetzen</h2><p>Mit aktuellen Technologien arbeiten, neue Ansätze kennenlernen und passende Lösungen für reale Anforderungen finden.</p></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
+                <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="techno-sinlge-service-box active">
                         <div class="techno-service-box-inner">
                             <div class="techno-service-content">
                                 <div class="techno-service-icon"><i class="flaticon-chat"></i></div>
-                                <div class="techno-service-title"><h2>Ziel 03</h2><p>Kurze Beschreibung des persönlichen oder beruflichen Ziels.</p></div>
+                                <div class="techno-service-title"><h2>Eigene Ideen umsetzen</h2><p>Projekte weiterdenken, verbessern und aus Ideen langfristig funktionierende Lösungen entwickeln.</p></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-12 padding-left">
+                <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="techno-sinlge-service-box-1">
                         <div class="techno-service-box-inner">
                             <div class="techno-service-content">
                                 <div class="techno-service-icon"><i class="flaticon-clock"></i></div>
-                                <div class="techno-service-title"><h2>Ziel 04</h2><p>Kurze Beschreibung des persönlichen oder beruflichen Ziels.</p></div>
+                                <div class="techno-service-title"><h2>Als Entwickler wachsen</h2><p>Meine technischen und persönlichen Fähigkeiten kontinuierlich ausbauen und Schritt für Schritt mehr Verantwortung übernehmen.</p></div>
                             </div>
                         </div>
                     </div>
@@ -783,43 +816,31 @@
                 <div class="col-lg-10">
                     <div class="experience-timeline single-details-box">
                         <article class="experience-item">
-                            <h3>Position / Tätigkeit 01</h3>
-                            <div class="experience-meta">Firma / Organisation · Zeitraum</div>
+                            <h3>Scrum</h3>
+                            <div class="experience-meta">Schule & Praxis · laufend angewendet</div>
                             <div class="details-text">
                                 <h4>Aufgaben & Verantwortlichkeiten:</h4>
-                                <p>Kurze Beschreibung der wichtigsten Aufgaben, Projekte und eingesetzten Technologien.</p>
+                                <p>Arbeit in klar definierten Aufgaben und Etappen, regelmässige Abstimmungen im Team sowie Planung und Nachverfolgung des aktuellen Projektstands.</p>
                             </div>
                         </article>
 
                         <article class="experience-item">
-                            <h3>Position / Tätigkeit 02</h3>
-                            <div class="experience-meta">Firma / Organisation · Zeitraum</div>
+                            <h3>Agile Methoden</h3>
+                            <div class="experience-meta">Schule & Praxis · laufend angewendet</div>
                             <div class="details-text">
                                 <h4>Aufgaben & Verantwortlichkeiten:</h4>
-                                <p>Kurze Beschreibung der wichtigsten Aufgaben, Projekte und eingesetzten Technologien.</p>
+                                <p>Iterative Entwicklung von Lösungen mit regelmässigem Feedback, schrittweiser Verbesserung und flexibler Anpassung an neue Anforderungen.</p>
                             </div>
                         </article>
 
                         <article class="experience-item">
-                            <h3>Position / Tätigkeit 03</h3>
-                            <div class="experience-meta">Firma / Organisation · Zeitraum</div>
+                            <h3>Git Flow</h3>
+                            <div class="experience-meta">Schule & Praxis · laufend angewendet</div>
                             <div class="details-text">
                                 <h4>Aufgaben & Verantwortlichkeiten:</h4>
-                                <p>Kurze Beschreibung der wichtigsten Aufgaben, Projekte und eingesetzten Technologien.</p>
+                                <p>Strukturierte Versionsverwaltung mit separaten Branches für neue Funktionen und Änderungen sowie kontrolliertes Zusammenführen des Codes im Team.</p>
                             </div>
                         </article>
-
-                        <article class="experience-item">
-                            <h3>Position / Tätigkeit 04</h3>
-                            <div class="experience-meta">Firma / Organisation · Zeitraum</div>
-                            <div class="details-text">
-                                <h4>Aufgaben & Verantwortlichkeiten:</h4>
-                                <p>Kurze Beschreibung der wichtigsten Aufgaben, Projekte und eingesetzten Technologien.</p>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="text-center">
-                        <div class="about-button"><a href="#">MEHR ERFAHRUNG ANZEIGEN <i class="fas fa-check-square"></i></a></div>
                     </div>
                 </div>
             </div>
@@ -827,47 +848,112 @@
     </div>
 </section>
 
-<section id="education" class="portfolio-section">
+<section id="documents" class="portfolio-section">
     <div class="container">
         <div class="dreamit-section-title style-two text-center section-title">
-            <h5>Bildung / Zertifikate</h5>
-            <h1>BILDUNG & <span>NACHWEISE</span></h1>
+            <h5>Dokumente & Zertifikate</h5>
+            <h1>DOKUMENTE & <span>ZERTIFIKATE</span></h1>
         </div>
 
-        <div class="row">
+        <div class="row documents-grid">
             <div class="col-lg-6">
                 <div class="single-circular-box">
-                    <div class="circular-thumb"><img src="~/images/resource/circular1.png" alt=""></div>
                     <div class="circular-title">
-                        <h3>Ausbildung / Zeugnis</h3>
-                        <p>Institution, Abschluss und Zeitraum. Hier kommt die kurze Beschreibung hinein.</p>
+                        <h3>BBC-Zertifikat</h3>
+                        <p>Erfolgreich abgeschlossenes Basislehrjahr Informatik mit praxisnahen Grundlagen in Programmierung, Betriebssystemen, Datenbanken, IoT, Applikationsentwicklung, Webentwicklung Frontend/Backend, Mobile App Entwicklung und individueller Projektarbeit.</p>
                     </div>
                     <div class="circular-btn">
-                        <a href="~/images/resource/career-1.jpg" class="certificate-open">ZEUGNIS ANSEHEN</a>
+                        <a href="~/documents/Bbc-Zertifikat.pdf" target="_blank" rel="noopener">DOKUMENT ÖFFNEN</a>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-6">
                 <div class="single-circular-box">
-                    <div class="circular-thumb"><img src="~/images/resource/circular2.png" alt=""></div>
                     <div class="circular-title">
-                        <h3>Zertifikat / Weiterbildung</h3>
-                        <p>Anbieter, Zertifikat und Datum. Hier kommt die kurze Beschreibung hinein.</p>
+                        <h3>ÜK 106 – Kompetenznachweis</h3>
+                        <p>Vertiefung der Grundlagen im Umgang mit relationalen Datenbanken, insbesondere beim Abfragen, Bearbeiten und Pflegen von Daten sowie beim strukturierten Arbeiten mit Datenbanksystemen.</p>
                     </div>
                     <div class="circular-btn">
-                        <a href="~/images/resource/career-1.jpg" class="certificate-open">ZERTIFIKAT ANSEHEN</a>
+                        <a href="~/documents/üK-106-Kompetenznachweis.pdf" target="_blank" rel="noopener">DOKUMENT ÖFFNEN</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="single-circular-box">
+                    <div class="circular-title">
+                        <h3>ÜK 187 – Kompetenznachweis</h3>
+                        <p>Praktische Auseinandersetzung mit der Einrichtung und Inbetriebnahme eines ICT-Arbeitsplatzes inklusive Betriebssystem, grundlegender Systemkonfiguration und Vorbereitung für den produktiven Einsatz.</p>
+                    </div>
+                    <div class="circular-btn">
+                        <a href="~/documents/üK-187-Kompetenznachweis.pdf" target="_blank" rel="noopener">DOKUMENT ÖFFNEN</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="single-circular-box">
+                    <div class="circular-title">
+                        <h3>ÜK 216 – Kompetenznachweis</h3>
+                        <p>Integration vernetzter Endgeräte in bestehende Plattformen mit Fokus auf Kommunikation, Einbindung von Geräten und Zusammenspiel verschiedener Komponenten innerhalb einer IoT-Umgebung.</p>
+                    </div>
+                    <div class="circular-btn">
+                        <a href="~/documents/üK-216-Kompetenznachweis.pdf" target="_blank" rel="noopener">DOKUMENT ÖFFNEN</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="single-circular-box">
+                    <div class="circular-title">
+                        <h3>ÜK 223 – Kompetenznachweis</h3>
+                        <p>Entwicklung einer objektorientierten Anwendung für mehrere Benutzer mit Fokus auf sauberer Programmstruktur, Objektorientierung und der Umsetzung von Multi-User-Funktionalitäten.</p>
+                    </div>
+                    <div class="circular-btn">
+                        <a href="~/documents/üK-223-Kompetenznachweis.pdf" target="_blank" rel="noopener">DOKUMENT ÖFFNEN</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="single-circular-box">
+                    <div class="circular-title">
+                        <h3>ÜK 295 – Kompetenznachweis</h3>
+                        <p>Umsetzung serverseitiger Applikationslogik mit Fokus auf Backend-Strukturen, Datenverarbeitung und der technischen Grundlage für funktionsfähige Webanwendungen.</p>
+                    </div>
+                    <div class="circular-btn">
+                        <a href="~/documents/üK-295-Kompetenznachweis.pdf" target="_blank" rel="noopener">DOKUMENT ÖFFNEN</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="single-circular-box">
+                    <div class="circular-title">
+                        <h3>ÜK 335 – Kompetenznachweis</h3>
+                        <p>Planung und Umsetzung einer mobilen Anwendung mit Fokus auf mobile Benutzeroberflächen, Applikationslogik und die praktische Entwicklung für mobile Endgeräte.</p>
+                    </div>
+                    <div class="circular-btn">
+                        <a href="~/documents/üK-335-Kompetenznachweis.pdf" target="_blank" rel="noopener">DOKUMENT ÖFFNEN</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="single-circular-box">
+                    <div class="circular-title">
+                        <h3>ÜK 294 – Kompetenznachweis</h3>
+                        <p>Entwicklung interaktiver Weboberflächen mit Fokus auf Benutzerinteraktion, strukturiertem Frontend-Aufbau und der Umsetzung funktionaler Webanwendungen.</p>
+                    </div>
+                    <div class="circular-btn">
+                        <a href="~/documents/üK-294-Kompetenznachweis.pdf" target="_blank" rel="noopener">DOKUMENT ÖFFNEN</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<div class="certificate-modal" id="certificateModal" aria-hidden="true">
-    <button type="button" id="certificateClose" aria-label="Schliessen">&times;</button>
-    <img id="certificateImage" src="" alt="Zertifikat oder Zeugnis">
-</div>
 
 <section id="contact">
     <div class="contact-us-area style-two pt-100">
@@ -895,7 +981,7 @@
 
                                 <div class="contact-us-title">
                                     <h2>STANDORT</h2>
-                                    <p>Schweiz</p>
+                                    <p>Schweiz, Bern</p>
                                 </div>
                             </div>
                         </div>
@@ -908,7 +994,7 @@
 
                                 <div class="contact-us-title">
                                     <h2>TELEFON</h2>
-                                    <p>+41 XX XXX XX XX</p>
+                                    <p>079 736 73 55</p>
                                 </div>
                             </div>
                         </div>
@@ -922,8 +1008,8 @@
                                 <div class="contact-us-title">
                                     <h2>E-MAIL</h2>
                                     <p>
-                                        <a href="mailto:deine-mail@example.com">
-                                            deine-mail@example.com
+                                        <a href="mailto:Francescodamico649@gmail.com">
+                                            Francescodamico649@gmail.com
                                         </a>
                                     </p>
                                 </div>
@@ -944,7 +1030,7 @@
                                 <form method="post" id="dreamit-form" novalidate>
 
                                     <h4>
-                                        Haben Sie Fragen oder möchten Sie mit mir in Kontakt treten? Ich freue mich auf Ihre Nachricht.
+                                        Sie möchten mehr über meine Projekte oder meine Bewerbung erfahren? Ich freue mich über eine Nachricht.
                                     </h4>
 
                                     <div class="row">
@@ -1048,35 +1134,6 @@
 
 @section Scripts {
     <script>
-        (function () {
-            var modal = document.getElementById("certificateModal");
-            var image = document.getElementById("certificateImage");
-            var close = document.getElementById("certificateClose");
-
-            document.querySelectorAll(".certificate-open").forEach(function (link) {
-                link.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    image.src = link.getAttribute("href");
-                    modal.classList.add("open");
-                    modal.setAttribute("aria-hidden", "false");
-                });
-            });
-
-            function closeModal() {
-                modal.classList.remove("open");
-                modal.setAttribute("aria-hidden", "true");
-                image.src = "";
-            }
-
-            close.addEventListener("click", closeModal);
-            modal.addEventListener("click", function (event) {
-                if (event.target === modal) closeModal();
-            });
-            document.addEventListener("keydown", function (event) {
-                if (event.key === "Escape") closeModal();
-            });
-        })();
-
         (function () {
             var form = document.getElementById("dreamit-form");
             var messageBox = document.getElementById("contact-form-message");
