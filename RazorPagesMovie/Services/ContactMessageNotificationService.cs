@@ -79,6 +79,7 @@ public class ContactMessageNotificationService : BackgroundService
                 if (response.IsSuccessStatusCode)
                 {
                     eintrag.NotificationSent = true;
+                    await context.SaveChangesAsync(stoppingToken);
                 }
                 else
                 {
@@ -90,7 +91,5 @@ public class ContactMessageNotificationService : BackgroundService
                 _logger.LogError(ex, "Telegram-Versand fehlgeschlagen für ContactMessage {Id}", eintrag.Id);
             }
         }
-
-        await context.SaveChangesAsync(stoppingToken);
     }
 }
