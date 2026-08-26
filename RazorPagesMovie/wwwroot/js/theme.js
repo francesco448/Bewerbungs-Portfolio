@@ -425,6 +425,8 @@
         time: 1000
     });
    /* Portfolio Isotope  */
+    if ($('.image_load').length) {
+
     $('.image_load').imagesLoaded(function() {
 
         if ($.fn.isotope) {
@@ -463,15 +465,21 @@
         };
 
     });
+
+    }
  // Venubox
 
-    $('.venobox').venobox({
+    if ($.fn.venobox && $('.venobox').length) {
 
-        numeratio: true,
+        $('.venobox').venobox({
 
-        infinigall: true
+            numeratio: true,
 
-    });
+            infinigall: true
+
+        });
+
+    }
 
 	/*--------------------------
      scrollUp
