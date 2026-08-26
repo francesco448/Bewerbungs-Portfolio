@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using RazorPagesMovie.Data;
 using RazorPagesMovie.Models;
 using RazorPagesMovie.Services;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +29,8 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AuthorizeFolder("/Admin");
 });
 builder.Services.AddControllers();
+
+builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.All));
 
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<IContactMessageNotificationQueue, ContactMessageNotificationQueue>();
