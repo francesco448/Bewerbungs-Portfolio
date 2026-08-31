@@ -195,6 +195,12 @@
             height: 100%;
             margin-bottom: 30px;
             box-shadow: 0 8px 30px rgba(20,30,60,.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        #projects .row + .row {
+            margin-top: 30px;
         }
 
         #projects .portfolio-details-thumb img {
@@ -216,6 +222,7 @@
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
+            margin-top: auto;
         }
 
             #projects .project-actions a {
@@ -456,6 +463,14 @@
 
             #projects .portfolio-details-thumb img {
                 height: 180px;
+            }
+
+            #projects .project-card {
+                margin-bottom: 60px;
+            }
+
+            #projects .row + .row {
+                margin-top: 0;
             }
 
             #experience .experience-timeline {
