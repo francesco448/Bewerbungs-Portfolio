@@ -325,6 +325,30 @@
             margin-bottom: 12px;
         }
 
+        #experience .experience-item-extra {
+            display: none;
+        }
+
+            #experience .experience-timeline.is-expanded .experience-item-extra {
+                display: block;
+            }
+
+        #experience .experience-toggle-wrap {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        #experience .experience-toggle-btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background: #0c5adb;
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
         #documents .documents-grid {
             display: flex;
             flex-wrap: wrap;
@@ -829,20 +853,11 @@
                 <div class="col-lg-10">
                     <div class="experience-timeline single-details-box">
                         <article class="experience-item">
-                            <h3>Scrum</h3>
+                            <h3>Agile Methodiken, wie Scrum</h3>
                             <div class="experience-meta">Schule & Praxis · laufend angewendet</div>
                             <div class="details-text">
                                 <h4>Aufgaben & Verantwortlichkeiten:</h4>
-                                <p>Arbeit in klar definierten Aufgaben und Etappen, regelmässige Abstimmungen im Team sowie Planung und Nachverfolgung des aktuellen Projektstands.</p>
-                            </div>
-                        </article>
-
-                        <article class="experience-item">
-                            <h3>Agile Methoden</h3>
-                            <div class="experience-meta">Schule & Praxis · laufend angewendet</div>
-                            <div class="details-text">
-                                <h4>Aufgaben & Verantwortlichkeiten:</h4>
-                                <p>Iterative Entwicklung von Lösungen mit regelmässigem Feedback, schrittweiser Verbesserung und flexibler Anpassung an neue Anforderungen.</p>
+                                <p>Arbeit in klar definierten Aufgaben und Etappen mit regelmässigen Abstimmungen im Team, iterativer Entwicklung von Lösungen mit regelmässigem Feedback sowie flexibler Anpassung an neue Anforderungen und Nachverfolgung des Projektstands.</p>
                             </div>
                         </article>
 
@@ -854,6 +869,75 @@
                                 <p>Strukturierte Versionsverwaltung mit separaten Branches für neue Funktionen und Änderungen sowie kontrolliertes Zusammenführen des Codes im Team.</p>
                             </div>
                         </article>
+
+                        <article class="experience-item">
+                            <h3>IPERKA</h3>
+                            <div class="experience-meta">Schule & Praxis · laufend angewendet</div>
+                            <div class="details-text">
+                                <h4>Aufgaben & Verantwortlichkeiten:</h4>
+                                <p>Strukturiertes Vorgehen bei Aufträgen nach dem Handlungszyklus Informieren, Planen, Entscheiden, Realisieren, Kontrollieren und Auswerten.</p>
+                            </div>
+                        </article>
+
+                        <article class="experience-item experience-item-extra">
+                            <h3>Ticketsystem-Arbeit</h3>
+                            <div class="experience-meta">Schule & Praxis · laufend angewendet</div>
+                            <div class="details-text">
+                                <h4>Aufgaben & Verantwortlichkeiten:</h4>
+                                <p>Erfassen, Priorisieren und Abarbeiten von Aufgaben in Ticketsystemen wie Jira zur strukturierten Nachverfolgung des Projektstands.</p>
+                            </div>
+                        </article>
+
+                        <article class="experience-item experience-item-extra">
+                            <h3>Testing & Fehleranalyse</h3>
+                            <div class="experience-meta">Schule & Praxis · laufend angewendet</div>
+                            <div class="details-text">
+                                <h4>Aufgaben & Verantwortlichkeiten:</h4>
+                                <p>Manuelles Testen von Funktionen sowie systematische Fehleranalyse und Debugging in echten Projekten zur Sicherstellung der Softwarequalität.</p>
+                            </div>
+                        </article>
+
+                        <article class="experience-item experience-item-extra">
+                            <h3>Dokumentation</h3>
+                            <div class="experience-meta">Schule · vereinzelt in Projekten</div>
+                            <div class="details-text">
+                                <h4>Aufgaben & Verantwortlichkeiten:</h4>
+                                <p>Vor allem in der Berufsschule Dokumentationen verfasst; in Projekten mit weiteren Mitarbeitenden zusätzlich Code an relevanten Stellen kommentiert, im Lehrbetrieb selbst eher selten.</p>
+                            </div>
+                        </article>
+
+                        <article class="experience-item experience-item-extra">
+                            <h3>CI/CD & Deployment</h3>
+                            <div class="experience-meta">Schule & Praxis · laufend angewendet</div>
+                            <div class="details-text">
+                                <h4>Aufgaben & Verantwortlichkeiten:</h4>
+                                <p>Containerisierung und Deployment von Anwendungen mit Docker sowie strukturierte Versionierung von Releases.</p>
+                            </div>
+                        </article>
+
+                        <article class="experience-item experience-item-extra">
+                            <h3>Datenbank-Design</h3>
+                            <div class="experience-meta">Schule & Praxis · laufend angewendet</div>
+                            <div class="details-text">
+                                <h4>Aufgaben & Verantwortlichkeiten:</h4>
+                                <p>Modellierung und Normalisierung relationaler Datenbanken in echten Projekten zur strukturierten Datenhaltung.</p>
+                            </div>
+                        </article>
+
+                        <article class="experience-item experience-item-extra">
+                            <h3>Code Reviews</h3>
+                            <div class="experience-meta">Schule & Praxis · laufend angewendet</div>
+                            <div class="details-text">
+                                <h4>Aufgaben & Verantwortlichkeiten:</h4>
+                                <p>Eigenen Code von anderen prüfen lassen, um Feedback zur Codequalität einzuholen und daraus zu lernen.</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="experience-toggle-wrap">
+                        <button type="button" id="experience-toggle" class="experience-toggle-btn" aria-expanded="false">
+                            Mehr erfahren
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1256,6 +1340,24 @@
                     .finally(function () {
                         submitButton.disabled = false;
                     });
+            });
+        })();
+
+        (function () {
+            var toggleButton = document.getElementById("experience-toggle");
+            var timeline = document.querySelector("#experience .experience-timeline");
+            var experienceSection = document.getElementById("experience");
+
+            if (!toggleButton || !timeline) return;
+
+            toggleButton.addEventListener("click", function () {
+                var isExpanded = timeline.classList.toggle("is-expanded");
+                toggleButton.textContent = isExpanded ? "Weniger anzeigen" : "Mehr erfahren";
+                toggleButton.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+
+                if (!isExpanded && experienceSection) {
+                    experienceSection.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
             });
         })();
     </script>
