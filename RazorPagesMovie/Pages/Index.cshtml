@@ -156,23 +156,57 @@
 
         #hero .hero-actions {
             display: flex;
+            align-items: center;
             gap: 12px;
             flex-wrap: wrap;
             margin-top: 25px;
         }
 
+        #hero .slider-button2 a {
+            margin-top: 0;
+        }
+
         #hero .hero-secondary {
             display: inline-block;
-            padding: 16px 28px;
+            padding: 17px 28px;
             border: 2px solid #fff;
             color: #fff;
             font-weight: 700;
+            font-size: 18px;
         }
 
             #hero .hero-secondary:hover {
                 background: #fff;
                 color: #111;
             }
+
+        @@media (min-width: 992px) and (max-width: 1199px) {
+            #hero .hero-secondary {
+                padding: 13px 26px;
+                font-size: 16px;
+            }
+        }
+
+        @@media (min-width: 768px) and (max-width: 991px) {
+            #hero .hero-secondary {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+        }
+
+        @@media (min-width: 600px) and (max-width: 767px) {
+            #hero .hero-secondary {
+                padding: 13px 23px;
+                font-size: 15px;
+            }
+        }
+
+        @@media (max-width: 599px) {
+            #hero .hero-secondary {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+        }
 
         #hero .hero-social {
             margin-top: 25px;
