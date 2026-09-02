@@ -44,9 +44,45 @@
                 margin: 0 auto;
             }
 
+        #sticky-header.portfolio-header .container {
+            max-width: 100%;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
         .portfolio-header .techno_menu ul li a {
-            padding-left: 14px;
-            padding-right: 14px;
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+
+        #sticky-header.portfolio-header .techno_menu ul.nav_scroll {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            margin-left: 0;
+        }
+
+        #sticky-header.portfolio-header .techno_menu > ul > li > a {
+            margin: 30px 8px;
+            font-size: 18px;
+            white-space: nowrap;
+        }
+
+        @@media (min-width: 1650px) {
+            #sticky-header.portfolio-header {
+                position: relative;
+            }
+
+            #sticky-header.portfolio-header .col-lg-8 {
+                position: static;
+            }
+
+            #sticky-header.portfolio-header .techno_menu {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
         }
 
         #sticky-header.portfolio-header {
@@ -714,6 +750,21 @@
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <article class="project-card">
+                    <div class="portfolio-details-thumb"><img src="~/images/projects/bewerbungsseite.png" alt="Bewerbungsseite"></div>
+                    <div class="portfolio-details-titles">
+                        <h3>Bewerbungsseite</h3>
+                        <p>Meine eigene Bewerbungswebsite, entwickelt mit ASP.NET Core Razor Pages, um Lebenslauf, Projekte und Fähigkeiten in einer selbst gebauten Anwendung zu präsentieren.</p>
+                    </div>
+                    <div class="details-category">
+                        <h4>TECH:</h4><p>C# · ASP.NET Core Razor Pages · Entity Framework Core · Bootstrap · JavaScript</p>
+                        <h4>Meine Arbeit:</h4><p>Konzeption, Umsetzung und laufende Weiterentwicklung von Struktur, Styling und Inhalten sowie Deployment im eigenen Homelab.</p>
+                    </div>
+                    <div class="project-actions"><a href="https://francesco-damico.ch/" target="_blank" rel="noopener">Projekt ansehen</a><a class="github" href="https://github.com/francesco448/Bewerbungs-Portfolio" target="_blank" rel="noopener">GitHub</a></div>
+                </article>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <article class="project-card">
                     <div class="portfolio-details-thumb"><img src="~/images/projects/Screenshot 2026-08-24 153904.png" alt="Francesco's Recipes World"></div>
                     <div class="portfolio-details-titles">
                         <h3>Francesco's Recipes World</h3>
@@ -1335,7 +1386,7 @@
                             showMessage("Danke für die Nachricht! Ich melde mich so schnell wie möglich.", true);
                             form.reset();
                         } else {
-                            showMessage("Beim Senden ist ein Fehler aufgetreten. Bitte versuche es erneut.", false);
+                            showMessage("Beim Senden ist leider ein Fehler aufgetreten. Bitte versuchen Sie es erneut", false);
                         }
                     })
                     .catch(function () {
