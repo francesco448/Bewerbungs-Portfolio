@@ -2813,6 +2813,18 @@ li.nav-item {
   bottom: 0;
   transition: 0.5s;
 }
+.active.techno-sinlge-service-box:hover:before {
+  height: 0;
+}
+.active.techno-sinlge-service-box:hover .techno-service-icon i {
+  color: #ed2c41;
+}
+.active.techno-sinlge-service-box:hover .techno-service-title h2 {
+  color: #151423;
+}
+.active.techno-sinlge-service-box:hover .techno-service-title p {
+  color: #33354b;
+}
 .service-button a:hover {
   background: #1a1829;
   color: #fff;
