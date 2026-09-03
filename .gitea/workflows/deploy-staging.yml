@@ -24,7 +24,7 @@ jobs:
           docker build \
             -t francesco448/razorpagesmovie:${{ gitea.sha }} \
             -t francesco448/razorpagesmovie:staging \
-            -f RazorPagesMovie/Dockerfile \
+            -f BewerbungWebseite/Dockerfile \
             .
 
       - name: Push Docker image
