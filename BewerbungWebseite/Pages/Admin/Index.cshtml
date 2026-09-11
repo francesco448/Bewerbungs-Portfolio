@@ -1,11 +1,76 @@
-@page
+﻿@page
 @model BewerbungsSeite.Pages.Admin.IndexModel
 @{
-    ViewData["Title"] = "Admin";
+    ViewData["Title"] = "Admin – Bewerbungsseite";
+    var edit = Model.EditMode;
 }
 
-<h1>Welcome, @User.Identity?.Name</h1>
+@section Styles {
+    <partial name="_PortfolioStyles" />
+    <link rel="stylesheet" href="~/css/page-editor.css" />
+}
 
-<form method="post" asp-page-handler="Logout">
-    <button type="submit" class="btn btn-secondary">Logout</button>
-</form>
+<div class="pe-toolbar">
+    <span class="pe-user">Angemeldet als @User.Identity?.Name</span>
+
+    @if (edit)
+    {
+        <span id="pe-status" class="pe-status" role="status">Bereit</span>
+        <a class="pe-toolbar-btn pe-toolbar-btn-primary" href="/Admin">Bearbeiten beenden</a>
+    }
+    else
+    {
+        <a class="pe-toolbar-btn pe-toolbar-btn-primary" href="/Admin?edit=true" title="Seite bearbeiten">&#9998; Bearbeiten</a>
+    }
+
+    <a class="pe-toolbar-btn" href="/" target="_blank" rel="noopener">Öffentliche Seite</a>
+
+    <form method="post" asp-page-handler="Logout" class="pe-logout">
+        <button type="submit" class="pe-toolbar-btn">Logout</button>
+    </form>
+</div>
+
+<div id="page-editor" class="@(edit ? "pe-editing" : null)">
+    <partial name="Sections/_Hero" model="SectionView.For(Model.PageContent.Hero, edit)" />
+    <partial name="Sections/_About" model="SectionView.For(Model.PageContent.About, edit)" />
+    <partial name="Sections/_Skills" model="SectionView.For(Model.PageContent.Skills, edit)" />
+    <partial name="Sections/_Projects" model="SectionView.For(Model.PageContent.Projects, edit)" />
+    <partial name="Sections/_Goals" model="SectionView.For(Model.PageContent.Goals, edit)" />
+    <partial name="Sections/_Experience" model="SectionView.For(Model.PageContent.Experience, edit)" />
+    <partial name="Sections/_Documents" model="SectionView.For(Model.PageContent.Documents, edit)" />
+    <partial name="Sections/_Contact" model="SectionView.For(Model.PageContent.Contact, edit)" />
+</div>
+
+@if (edit)
+{
+    @Html.AntiForgeryToken()
+    @* accept wird je nach Auswahl vom Editor gesetzt (Bild oder PDF). *@
+    <input type="file" id="pe-file-input" hidden />
+
+    @* Erscheint nur, wenn die Sitzung abgelaufen ist. Nach dem Anmelden wird
+       die fehlgeschlagene Aktion wiederholt, die Seite bleibt stehen. *@
+    <div id="pe-login" class="pe-login" hidden>
+        <div class="pe-login-box">
+            <h2>Sitzung abgelaufen</h2>
+            <p>Deine Änderungen sind noch da. Melde dich an, dann wird der letzte Schritt automatisch wiederholt.</p>
+
+            <label for="pe-login-user">Benutzername</label>
+            <input type="text" id="pe-login-user" autocomplete="username" />
+
+            <label for="pe-login-pass">Passwort</label>
+            <input type="password" id="pe-login-pass" autocomplete="current-password" />
+
+            <p class="pe-login-error" id="pe-login-error" hidden></p>
+
+            <button type="button" id="pe-login-submit">Anmelden</button>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <partial name="_PortfolioScripts" />
+    @if (edit)
+    {
+        <script src="~/js/page-editor.js" defer></script>
+    }
+}
