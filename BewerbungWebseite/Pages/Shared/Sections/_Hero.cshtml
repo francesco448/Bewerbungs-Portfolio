@@ -1,0 +1,93 @@
+@model SectionView<HeroSection>
+@{
+    var hero = Model.Section;
+    var edit = Model.EditMode;
+    var lastLine = hero.TitleLines.Count - 1;
+}
+
+<section id="hero" class="slider-area slider8 d-flex align-items-center" @EditMarkup.Section(edit, "hero")>
+    <div class="container">
+        <div class="row d-flex align-items-center slider">
+            <div class="col-lg-7 col-md-12 col-sm-12">
+                <div class="slider-content" @EditMarkup.StringList(edit, "titleLines")>
+                    <p class="section-kicker" @EditMarkup.Field(edit, "kicker", max: ContentLimits.Kicker)>@hero.Kicker</p>
+                    @for (var i = 0; i < hero.TitleLines.Count; i++)
+                    {
+                        @if (i == lastLine)
+                        {
+                            <h1 @EditMarkup.Item(edit)><span class="color3" @EditMarkup.Editable(edit, max: ContentLimits.Heading)>@hero.TitleLines[i]</span></h1>
+                        }
+                        else
+                        {
+                            <h1 @EditMarkup.Item(edit) @EditMarkup.Editable(edit, max: ContentLimits.Heading)>@hero.TitleLines[i]</h1>
+                        }
+                    }
+                    <p @EditMarkup.Field(edit, "intro", multiline: true, max: ContentLimits.ParagraphText)>@hero.Intro</p>
+                    <div class="hero-actions">
+                        <div class="slider-button2" @EditMarkup.Object(edit, "primaryButton")>
+                            <a href="@hero.PrimaryButton.Url"><partial name="_EditableText" model='new EditableText(hero.PrimaryButton.Text, "text", edit, ContentLimits.ButtonLabel)' /> <i class="fas fa-check-square"></i></a>
+                            @if (edit)
+                            {
+                                <input class="pe-url" type="url" data-field="url" maxlength="@ContentLimits.Url" value="@hero.PrimaryButton.Url" aria-label="Ziel des Buttons" />
+                            }
+                        </div>
+                        @if (edit)
+                        {
+                            <span data-object="secondaryButton">
+                                <a class="hero-secondary" href="@hero.SecondaryButton.Url">
+                                    <span data-field="text" data-max="@ContentLimits.ButtonLabel" contenteditable="true">@hero.SecondaryButton.Text</span>
+                                </a>
+                                <input class="pe-url" type="url" data-field="url" maxlength="@ContentLimits.Url" value="@hero.SecondaryButton.Url" aria-label="Ziel des zweiten Buttons" />
+                            </span>
+                        }
+                        else
+                        {
+                            <a class="hero-secondary" href="@hero.SecondaryButton.Url">
+                                @hero.SecondaryButton.Text
+                            </a>
+                        }
+                    </div>
+                    <div class="hero-social" @EditMarkup.List(edit, "socialLinks")>
+                        @foreach (var link in hero.SocialLinks)
+                        {
+                            var external = !link.Url.StartsWith("mailto:", StringComparison.OrdinalIgnoreCase);
+                            @if (edit)
+                            {
+                                <span class="pe-item-inline" data-item="true">
+                                    <a href="@link.Url" target="@(external ? "_blank" : null)" rel="@(external ? "noopener" : null)" data-field="text" data-max="@ContentLimits.ButtonLabel" contenteditable="true">@link.Text</a>
+                                    <input class="pe-url" type="url" data-field="url" maxlength="@ContentLimits.Url" value="@link.Url" aria-label="Link-Ziel" />
+                                    <partial name="_EditItemControls" />
+                                </span>
+                            }
+                            else if (external)
+                            {
+                                <a href="@link.Url" target="_blank" rel="noopener">@link.Text</a>
+                            }
+                            else
+                            {
+                                <a href="@link.Url">@link.Text</a>
+                            }
+                        }
+                        @if (edit)
+                        {
+                            <button type="button" class="pe-add" data-add="socialLinks">+ Link</button>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="slider-thumb-images">
+                    <img src="@hero.PortraitImage" alt="@hero.PortraitAlt" @EditMarkup.Image(edit, "portraitImage", hero.PortraitImage)>
+                </div>
+                <div class="slider-shape">
+                    <div class="shape-inner bounce-animate2">
+                        <img src="~/images/slider/shape1.png" alt="">
+                    </div>
+                    <div class="shape-inner-1 bounce-animate4">
+                        <img src="~/images/slider/shape2.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

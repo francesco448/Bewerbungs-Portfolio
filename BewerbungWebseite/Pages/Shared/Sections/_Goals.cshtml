@@ -1,0 +1,54 @@
+@model SectionView<GoalsSection>
+@{
+    var goals = Model.Section;
+    var edit = Model.EditMode;
+}
+
+<section id="goals" @EditMarkup.Section(edit, "goals")>
+    <div class="service-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="dreamit-section-title text-center">
+                        <h5 @EditMarkup.Field(edit, "kicker", max: ContentLimits.Kicker)>@goals.Kicker</h5>
+                        <h1><partial name="_EditableText" model='new EditableText(goals.Title, "title", edit, ContentLimits.Heading)' /> <span @EditMarkup.Field(edit, "titleHighlight", max: ContentLimits.Heading)>@goals.TitleHighlight</span></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row goals-grid" @EditMarkup.List(edit, "items")>
+                @for (var i = 0; i < goals.Items.Count; i++)
+                {
+                    var item = goals.Items[i];
+                    @* Vier Kacheln pro Reihe, jede zweite in der abweichenden Theme-Variante. *@
+                    var boxClass = i % 2 == 1 ? "techno-sinlge-service-box-1" : "techno-sinlge-service-box";
+                    if (item.Highlighted)
+                    {
+                        boxClass += " active";
+                    }
+
+                    <div class="col-lg-3 col-md-6 col-sm-12" @EditMarkup.Item(edit)>
+                        <div class="@boxClass">
+                            <div class="techno-service-box-inner">
+                                <div class="techno-service-content">
+                                    <div class="techno-service-icon"><i class="@item.Icon"></i></div>
+                                    <div class="techno-service-title"><h2 @EditMarkup.Field(edit, "title", max: ContentLimits.TileTitle)>@item.Title</h2><p @EditMarkup.Field(edit, "text", multiline: true, max: ContentLimits.TileText)>@item.Text</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        @if (edit)
+                        {
+                            <input class="pe-icon" type="text" data-field="icon" maxlength="@ContentLimits.IconClass" value="@item.Icon" aria-label="Icon-Klasse" />
+                            <partial name="_EditItemControls" />
+                            <label class="pe-flag"><input type="checkbox" data-flag="highlighted" checked="@(item.Highlighted ? "checked" : null)" /> hervorgehoben</label>
+                        }
+                    </div>
+                }
+            </div>
+            @if (edit)
+            {
+                <button type="button" class="pe-add" data-add="items">+ Ziel</button>
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,43 @@
+@model SectionView<DocumentsSection>
+@{
+    var documents = Model.Section;
+    var edit = Model.EditMode;
+}
+
+<section id="documents" class="portfolio-section" @EditMarkup.Section(edit, "documents")>
+    <div class="container">
+        <div class="dreamit-section-title style-two text-center section-title">
+            <h5 @EditMarkup.Field(edit, "kicker", max: ContentLimits.Kicker)>@documents.Kicker</h5>
+            <h1><partial name="_EditableText" model='new EditableText(documents.Title, "title", edit, ContentLimits.Heading)' /> <span @EditMarkup.Field(edit, "titleHighlight", max: ContentLimits.Heading)>@documents.TitleHighlight</span></h1>
+        </div>
+
+        <div class="row documents-grid" @EditMarkup.List(edit, "items")>
+            @foreach (var item in documents.Items)
+            {
+                <div class="col-lg-6" @EditMarkup.Item(edit)>
+                    <div class="single-circular-box">
+                        <div class="circular-title">
+                            <h3 @EditMarkup.Field(edit, "title", max: ContentLimits.CardTitle)>@item.Title</h3>
+                            <p @EditMarkup.Field(edit, "description", multiline: true, max: ContentLimits.ParagraphText)>@item.Description</p>
+                        </div>
+                        <div class="circular-btn">
+                            <a href="@item.FileUrl" target="_blank" rel="noopener" @EditMarkup.Field(edit, "linkText", max: ContentLimits.ButtonLabel)>@item.LinkText</a>
+                        </div>
+                    </div>
+                    @if (edit)
+                    {
+                        <div class="pe-file-row">
+                            <input class="pe-url" type="text" data-field="fileUrl" maxlength="@ContentLimits.Url" value="@item.FileUrl" aria-label="Pfad zur Datei" />
+                            <button type="button" class="pe-file" data-file="documents" data-accept="application/pdf">PDF hochladen</button>
+                        </div>
+                        <partial name="_EditItemControls" />
+                    }
+                </div>
+            }
+        </div>
+        @if (edit)
+        {
+            <button type="button" class="pe-add" data-add="items">+ Dokument</button>
+        }
+    </div>
+</section>

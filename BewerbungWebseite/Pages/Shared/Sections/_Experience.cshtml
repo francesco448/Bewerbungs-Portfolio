@@ -1,0 +1,61 @@
+@model SectionView<ExperienceSection>
+@{
+    var experience = Model.Section;
+    var edit = Model.EditMode;
+}
+
+<section id="experience" @EditMarkup.Section(edit, "experience")>
+    <div class="career-details">
+        <div class="container">
+            <div class="dreamit-section-title style-two text-center section-title">
+                <h5 @EditMarkup.Field(edit, "kicker", max: ContentLimits.Kicker)>@experience.Kicker</h5>
+                <h1><partial name="_EditableText" model='new EditableText(experience.Title, "title", edit, ContentLimits.Heading)' /> <span @EditMarkup.Field(edit, "titleHighlight", max: ContentLimits.Heading)>@experience.TitleHighlight</span></h1>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="experience-timeline single-details-box" @EditMarkup.List(edit, "items")>
+                        @foreach (var item in experience.Items)
+                        {
+                            <article class="experience-item@(item.Collapsed && !edit ? " experience-item-extra" : null)" @EditMarkup.Item(edit)>
+                                <h3 @EditMarkup.Field(edit, "title", max: ContentLimits.CardTitle)>@item.Title</h3>
+                                <div class="experience-meta" @EditMarkup.Field(edit, "meta", max: ContentLimits.Meta)>@item.Meta</div>
+                                <div class="details-text">
+                                    <h4 @EditMarkup.Field(edit, "detailHeading", max: ContentLimits.DetailHeading)>@item.DetailHeading</h4>
+                                    <p @EditMarkup.Field(edit, "text", multiline: true, max: ContentLimits.ParagraphText)>@item.Text</p>
+                                </div>
+                                @if (edit)
+                                {
+                                    <partial name="_EditItemControls" />
+                                    <label class="pe-flag"><input type="checkbox" data-flag="collapsed" checked="@(item.Collapsed ? "checked" : null)" /> erst nach Klick auf den Button sichtbar</label>
+                                }
+                            </article>
+                        }
+                    </div>
+                    @if (edit)
+                    {
+                        <button type="button" class="pe-add" data-add="items">+ Erfahrung</button>
+                    }
+
+                    <div class="experience-toggle-wrap">
+                        <button type="button"
+                                id="experience-toggle"
+                                class="experience-toggle-btn"
+                                aria-expanded="false"
+                                data-more-text="@experience.ToggleMoreText"
+                                data-less-text="@experience.ToggleLessText">
+                            @experience.ToggleMoreText
+                        </button>
+                    </div>
+                    @if (edit)
+                    {
+                        <div class="pe-toggle-texts">
+                            <label>Button zugeklappt <input type="text" data-field="toggleMoreText" maxlength="@ContentLimits.ButtonLabel" value="@experience.ToggleMoreText" /></label>
+                            <label>Button aufgeklappt <input type="text" data-field="toggleLessText" maxlength="@ContentLimits.ButtonLabel" value="@experience.ToggleLessText" /></label>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,187 @@
+@model SectionView<ContactSection>
+@{
+    var contact = Model.Section;
+    var edit = Model.EditMode;
+}
+
+<section id="contact" @EditMarkup.Section(edit, "contact")>
+    <div class="contact-us-area style-two pt-100">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="dreamit-section-title style-two text-center">
+                        <h5 @EditMarkup.Field(edit, "kicker", max: ContentLimits.Kicker)>@contact.Kicker</h5>
+                        <h1><partial name="_EditableText" model='new EditableText(contact.Title, "title", edit, ContentLimits.Heading)' /> <span @EditMarkup.Field(edit, "titleHighlight", max: ContentLimits.Heading)>@contact.TitleHighlight</span></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="row" @EditMarkup.List(edit, "infoBoxes")>
+                        @foreach (var box in contact.InfoBoxes)
+                        {
+                            <div class="col-lg-12" @EditMarkup.Item(edit)>
+                                <div class="contact-us-single-box">
+                                    <div class="contact-us-icon">
+                                        <i class="@box.Icon"></i>
+                                    </div>
+
+                                    <div class="contact-us-title">
+                                        <h2 @EditMarkup.Field(edit, "title", max: ContentLimits.FactLabel)>@box.Title</h2>
+                                        <p>
+                                            @if (string.IsNullOrWhiteSpace(box.LinkUrl) && !edit)
+                                            {
+                                                @box.Text
+                                            }
+                                            else if (!edit)
+                                            {
+                                                <a href="@box.LinkUrl">@box.Text</a>
+                                            }
+                                            else
+                                            {
+                                                <span data-field="text" data-max="@ContentLimits.FactValue" contenteditable="true">@box.Text</span>
+                                                <input class="pe-url" type="text" data-field="linkUrl" maxlength="@ContentLimits.Url" value="@box.LinkUrl" aria-label="Link-Ziel (leer lassen fuer reinen Text)" />
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                                @if (edit)
+                                {
+                                    <input class="pe-icon" type="text" data-field="icon" maxlength="@ContentLimits.IconClass" value="@box.Icon" aria-label="Icon-Klasse" />
+                                    <partial name="_EditItemControls" />
+                                }
+                            </div>
+                        }
+                        @if (edit)
+                        {
+                            <button type="button" class="pe-add" data-add="infoBoxes">+ Kontaktangabe</button>
+                        }
+                    </div>
+                </div>
+
+                @* Das Formular selbst ist Funktionalitaet und bleibt fest im Code;
+                   nur die Einleitung darueber kommt aus dem Inhalt. *@
+                <div class="col-lg-8 col-md-6 col-sm-12">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="contact-form-box style-two">
+
+                                <div id="contact-form-message" class="alert" role="alert" style="display:none;"></div>
+
+                                <form method="post" id="dreamit-form" novalidate>
+
+                                    @* Zeilenumbrueche im Text werden als <br> gerendert. *@
+                                    <h4 @EditMarkup.Field(edit, "formHeading", multiline: true, max: ContentLimits.FormIntro)>
+                                        @{ var headingLines = contact.FormHeading.Replace("\r\n", "\n").Split('\n'); }
+                                        @for (var i = 0; i < headingLines.Length; i++)
+                                        {
+                                            if (i > 0)
+                                            {
+                                                <br />
+                                            }
+                                            @headingLines[i]
+                                        }
+                                    </h4>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-title">
+                                                <p>Name (Pflichtfeld)</p>
+                                            </div>
+
+                                            <div class="from-box">
+                                                <input
+                                                    type="text"
+                                                    name="name"
+                                                    placeholder="Name*"
+                                                    required>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-title">
+                                                <p>E-Mail (Pflichtfeld)</p>
+                                            </div>
+
+                                            <div class="from-box">
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    placeholder="E-Mail*"
+                                                    required>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-title">
+                                                <p>Telefon (optional)</p>
+                                            </div>
+
+                                            <div class="from-box">
+                                                <input
+                                                    type="tel"
+                                                    name="phone"
+                                                    placeholder="z. B. 079 123 45 67 oder +41 79 123 45 67">
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-title">
+                                                <p>Betreff (Pflichtfeld)</p>
+                                            </div>
+
+                                            <div class="from-box">
+                                                <input
+                                                    type="text"
+                                                    name="subject"
+                                                    placeholder="Betreff*"
+                                                    required>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <div class="form-title">
+                                                <p>Nachricht</p>
+                                            </div>
+
+                                            <div class="from-box">
+                                                <textarea
+                                                    name="message"
+                                                    cols="30"
+                                                    rows="10"
+                                                    placeholder="Nachricht*"
+                                                    required></textarea>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <div class="contact-form">
+                                                <button type="submit">
+                                                    NACHRICHT SENDEN
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

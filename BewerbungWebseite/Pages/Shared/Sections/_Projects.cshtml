@@ -1,0 +1,141 @@
+@model SectionView<ProjectsSection>
+@{
+    var projects = Model.Section;
+    var edit = Model.EditMode;
+}
+
+@functions {
+    // Titel, Beschreibung, Detailbloecke und Links -- identisch fuer schmale und breite Karten.
+    async Task RenderCardBody(ProjectItem project, bool edit)
+    {
+        <div class="portfolio-details-titles">
+            <h3 @EditMarkup.Field(edit, "title", max: ContentLimits.CardTitle)>@project.Title</h3>
+            <p>
+                @if (edit)
+                {
+                    <strong data-field="descriptionLead" data-max="@ContentLimits.DetailHeading" contenteditable="true">@project.DescriptionLead</strong>
+                }
+                else if (!string.IsNullOrWhiteSpace(project.DescriptionLead))
+                {
+                    <strong>@project.DescriptionLead</strong>@:
+                }
+                <partial name="_EditableText" model='new EditableText(project.Description, "description", edit, ContentLimits.ParagraphText)' />
+            </p>
+        </div>
+        <div class="details-category" @EditMarkup.List(edit, "details")>
+            @foreach (var detail in project.Details)
+            {
+                @if (edit)
+                {
+                    <div data-item="true">
+                        <h4 data-field="heading" data-max="@ContentLimits.DetailHeading" contenteditable="true">@detail.Heading</h4>
+                        <p data-field="text" data-multiline="true" data-max="@ContentLimits.ParagraphText" contenteditable="true">@detail.Text</p>
+                        <partial name="_EditItemControls" />
+                    </div>
+                }
+                else
+                {
+                    <h4>@detail.Heading</h4>
+                    <p>@detail.Text</p>
+                }
+            }
+            @if (edit)
+            {
+                <button type="button" class="pe-add" data-add="details">+ Abschnitt</button>
+            }
+        </div>
+        @if (edit)
+        {
+            <div class="project-actions" data-list="links">
+                @foreach (var link in project.Links)
+                {
+                    <span class="pe-item-inline" data-item="true">
+                        <a href="@link.Url" target="_blank" rel="noopener" data-field="text" data-max="@ContentLimits.ButtonLabel" contenteditable="true">@link.Text</a>
+                        <input class="pe-url" type="url" data-field="url" maxlength="@ContentLimits.Url" value="@link.Url" aria-label="Link-Ziel" />
+                        <partial name="_EditItemControls" />
+                    </span>
+                }
+                <button type="button" class="pe-add" data-add="links">+ Link</button>
+            </div>
+        }
+        else if (project.Links.Count > 0)
+        {
+            <div class="project-actions">
+                @for (var i = 0; i < project.Links.Count; i++)
+                {
+                    var link = project.Links[i];
+                    <a class="@(i == 0 ? null : "github")" href="@link.Url" target="_blank" rel="noopener">@link.Text</a>
+                }
+            </div>
+        }
+    }
+}
+
+<section id="projects" class="portfolio-section" @EditMarkup.Section(edit, "projects")>
+    <div class="container" @EditMarkup.List(edit, "items")>
+        <div class="dreamit-section-title style-two text-center section-title">
+            <h5 @EditMarkup.Field(edit, "kicker", max: ContentLimits.Kicker)>@projects.Kicker</h5>
+            <h1><partial name="_EditableText" model='new EditableText(projects.Title, "title", edit, ContentLimits.Heading)' /> <span @EditMarkup.Field(edit, "titleHighlight", max: ContentLimits.Heading)>@projects.TitleHighlight</span></h1>
+        </div>
+
+        @{
+            // Schmale Karten stehen zu zweit in einer Reihe, breite Karten je allein.
+            var index = 0;
+        }
+        @while (index < projects.Items.Count)
+        {
+            var project = projects.Items[index];
+
+            if (project.Wide)
+            {
+                <div class="row">
+                    <div class="col-lg-12" @EditMarkup.Item(edit)>
+                        <article class="project-card project-card-expanded">
+                            <div class="row align-items-stretch g-0">
+                                <div class="col-lg-5">
+                                    <div class="portfolio-details-thumb"><img src="@project.Image" alt="@project.ImageAlt" @EditMarkup.Image(edit, "image", project.Image)></div>
+                                </div>
+                                <div class="col-lg-7">
+                                    @{ await RenderCardBody(project, edit); }
+                                </div>
+                            </div>
+                        </article>
+                        @if (edit)
+                        {
+                            <partial name="_EditItemControls" />
+                            <label class="pe-flag"><input type="checkbox" data-flag="wide" checked="checked" /> breite Karte</label>
+                        }
+                    </div>
+                </div>
+                index++;
+            }
+            else
+            {
+                var pair = projects.Items.Skip(index).TakeWhile(p => !p.Wide).Take(2).ToList();
+
+                <div class="row">
+                    @foreach (var narrow in pair)
+                    {
+                        <div class="col-lg-6 col-md-6" @EditMarkup.Item(edit)>
+                            <article class="project-card">
+                                <div class="portfolio-details-thumb"><img src="@narrow.Image" alt="@narrow.ImageAlt" @EditMarkup.Image(edit, "image", narrow.Image)></div>
+                                @{ await RenderCardBody(narrow, edit); }
+                            </article>
+                            @if (edit)
+                            {
+                                <partial name="_EditItemControls" />
+                                <label class="pe-flag"><input type="checkbox" data-flag="wide" /> breite Karte</label>
+                            }
+                        </div>
+                    }
+                </div>
+                index += pair.Count;
+            }
+        }
+
+        @if (edit)
+        {
+            <button type="button" class="pe-add" data-add="items">+ Projekt</button>
+        }
+    </div>
+</section>

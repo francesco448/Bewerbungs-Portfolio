@@ -1,0 +1,43 @@
+@model SectionView<AboutSection>
+@{
+    var about = Model.Section;
+    var edit = Model.EditMode;
+}
+
+<section id="about" @EditMarkup.Section(edit, "about")>
+    <div class="about-area style-three">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="techno-about-thumb-box">
+                        <div class="techno-about-thumb-3">
+                            <img src="@about.Image" alt="@about.ImageAlt" @EditMarkup.Image(edit, "image", about.Image)>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="row about-left">
+                        <div class="col-lg-12">
+                            <div class="dreamit-section-title style-four white">
+                                <h5 @EditMarkup.Field(edit, "kicker", max: ContentLimits.Kicker)>@about.Kicker</h5>
+                                <h1 @EditMarkup.Field(edit, "titleLine1", max: ContentLimits.Heading)>@about.TitleLine1</h1>
+                                <h1><partial name="_EditableText" model='new EditableText(about.TitleLine2, "titleLine2", edit, ContentLimits.Heading)' /> <span class="color2" @EditMarkup.Field(edit, "titleLine2Highlight", max: ContentLimits.Heading)>@about.TitleLine2Highlight</span></h1>
+                                <p class="pt-text" @EditMarkup.Field(edit, "text", multiline: true, max: ContentLimits.ParagraphText)>@about.Text</p>
+                            </div>
+                            <div class="about-facts" @EditMarkup.List(edit, "facts")>
+                                @foreach (var fact in about.Facts)
+                                {
+                                    <div class="about-fact" @EditMarkup.Item(edit)><strong @EditMarkup.Field(edit, "label", max: ContentLimits.FactLabel)>@fact.Label</strong><span><partial name="_EditableText" model='new EditableText(fact.Value, "value", edit, ContentLimits.FactValue)' /> <i class="fas fa-angle-right"></i></span>@if (edit) {<partial name="_EditItemControls" />}</div>
+                                }
+                                @if (edit)
+                                {
+                                    <button type="button" class="pe-add" data-add="facts">+ Eintrag</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
