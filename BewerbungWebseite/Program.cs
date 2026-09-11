@@ -21,6 +21,31 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/Login";
         options.AccessDeniedPath = "/Login";
+
+        // Nach 30 Minuten ohne Aktivitaet automatisch abmelden. Die Frist steht im
+        // verschluesselten Ticket und wird serverseitig geprueft -- sie gilt also auch
+        // dann, wenn der Browser das Cookie ueber einen Neustart hinweg wiederherstellt.
+        // SlidingExpiration erneuert sie bei jedem Aufruf, beim Arbeiten fliegt niemand raus.
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+        options.SlidingExpiration = true;
+
+        // Das Cookie wird bei Aufrufen von fremden Seiten nicht mitgeschickt.
+        options.Cookie.SameSite = SameSiteMode.Strict;
+
+        // Aufrufe der API sollen 401 bekommen statt einer Weiterleitung auf die
+        // Login-Seite -- sonst haelt der Editor eine abgelaufene Sitzung faelschlich
+        // fuer eine erfolgreiche Speicherung.
+        options.Events.OnRedirectToLogin = context =>
+        {
+            if (context.Request.Path.StartsWithSegments("/api"))
+            {
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                return Task.CompletedTask;
+            }
+
+            context.Response.Redirect(context.RedirectUri);
+            return Task.CompletedTask;
+        };
     });
 builder.Services.AddAuthorization();
 
@@ -33,6 +58,9 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.All));
 
 builder.Services.AddHttpClient();
+builder.Services.AddAntiforgery(options => options.HeaderName = "RequestVerificationToken");
+
+builder.Services.AddScoped<IPageContentService, PageContentService>();
 builder.Services.AddSingleton<IContactMessageNotificationQueue, ContactMessageNotificationQueue>();
 builder.Services.AddHostedService<ContactMessageNotificationService>();
 
