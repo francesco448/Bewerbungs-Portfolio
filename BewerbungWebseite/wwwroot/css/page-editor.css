@@ -1,0 +1,363 @@
+/* Oberflaeche des Seiten-Editors auf /Admin. Wird auf der oeffentlichen Seite nie geladen. */
+
+.pe-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1200;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    background: #101426;
+    color: #fff;
+    font-size: 14px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .25);
+}
+
+.pe-user {
+    margin-right: auto;
+    opacity: .8;
+}
+
+.pe-toolbar-btn {
+    display: inline-block;
+    padding: 7px 14px;
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 4px;
+    background: transparent;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pe-toolbar-btn:hover {
+    background: rgba(255, 255, 255, .12);
+    color: #fff;
+}
+
+.pe-toolbar-btn-primary {
+    background: #2f6bff;
+    border-color: #2f6bff;
+}
+
+.pe-logout {
+    display: inline;
+    margin: 0;
+}
+
+.pe-status {
+    padding: 5px 10px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, .1);
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.pe-status.is-saving {
+    background: #7a5d00;
+}
+
+.pe-status.is-saved {
+    background: #1d6b3a;
+}
+
+.pe-status.is-error {
+    background: #8c1f1f;
+}
+
+/* --- Bearbeitbare Elemente --- */
+
+.pe-editing [contenteditable="true"] {
+    outline: 1px dashed rgba(47, 107, 255, .5);
+    outline-offset: 3px;
+    min-width: 20px;
+    min-height: 1em;
+    max-width: 100%;
+    /* Lange Woerter ohne Leerzeichen umbrechen, statt aus dem Container zu laufen.
+       "anywhere" senkt auch die Mindestbreite, damit Flex-/Grid-Eltern nicht mitwachsen. */
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    cursor: text;
+}
+
+.pe-editing [contenteditable="true"]:focus {
+    outline: 2px solid #2f6bff;
+    background: rgba(47, 107, 255, .08);
+}
+
+/* Kurzes Hervorheben des Feldes, das beim Speichern vom Server abgelehnt
+   wurde (zu lang) -- gesetzt und nach 2.5s wieder entfernt von reportError
+   in page-editor.js. */
+.pe-editing .pe-field-error {
+    outline: 2px solid #d32f2f !important;
+    background: rgba(211, 47, 47, .1) !important;
+    animation: pe-field-error-shake .4s;
+}
+
+@keyframes pe-field-error-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+/* Beschriftung der Kurzfakten nicht zusammendruecken, wenn der Wert lang wird. */
+.pe-editing #about .about-fact > strong {
+    flex-shrink: 0;
+    max-width: 40%;
+    margin-right: 12px;
+}
+
+.pe-editing #about .about-fact > span {
+    min-width: 0;
+}
+
+/* Zeichenzaehler "aktuell / maximal", von page-editor.js hinter jedes
+   Feld mit data-max eingefuegt. Steht bewusst nicht im Textfluss der
+   contenteditable-Elemente (eigenes Element danach), damit er beim
+   Speichern nie versehentlich mit ausgelesen wird. */
+.pe-editing .pe-charcount {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    background: rgba(51, 65, 92, .08);
+    color: #6b7690;
+    font-size: 11px;
+    font-weight: 400;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.pe-editing .pe-charcount.is-warning {
+    background: #fff1cc;
+    color: #8a6400;
+}
+
+.pe-editing .pe-charcount.is-limit {
+    background: #ffe0e0;
+    color: #a12626;
+    font-weight: 700;
+}
+
+.pe-editing [data-image] {
+    outline: 2px dashed rgba(47, 107, 255, .6);
+    outline-offset: 3px;
+    cursor: pointer;
+}
+
+.pe-editing [data-image]:hover {
+    outline-color: #2f6bff;
+}
+
+.pe-editing [data-item] {
+    position: relative;
+}
+
+.pe-item-controls {
+    display: inline-flex;
+    gap: 4px;
+    flex-shrink: 0;
+    margin: 6px 0;
+    vertical-align: middle;
+}
+
+.pe-item-controls button {
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 1px solid #c3ccdb;
+    border-radius: 4px;
+    background: #fff;
+    color: #33415c;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.pe-item-controls button:hover {
+    background: #eef2fa;
+}
+
+.pe-item-controls .pe-delete:hover {
+    background: #ffe9e9;
+    border-color: #d98686;
+    color: #a12626;
+}
+
+.pe-add {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 7px 14px;
+    border: 1px dashed #7a92c4;
+    border-radius: 4px;
+    background: #f4f7ff;
+    color: #2f4d94;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.pe-add:hover {
+    background: #e6edff;
+}
+
+.pe-url,
+.pe-icon {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin: 6px 0;
+    padding: 5px 8px;
+    border: 1px solid #c3ccdb;
+    border-radius: 4px;
+    background: #fff;
+    color: #22304a;
+    font-size: 13px;
+}
+
+.pe-file-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0;
+}
+
+.pe-file-row .pe-url {
+    flex: 1 1 240px;
+    margin: 0;
+}
+
+.pe-file {
+    padding: 6px 12px;
+    border: 1px solid #7a92c4;
+    border-radius: 4px;
+    background: #f4f7ff;
+    color: #2f4d94;
+    font-size: 13px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.pe-file:hover {
+    background: #e6edff;
+}
+
+.pe-item-inline {
+    display: inline-block;
+    margin-right: 14px;
+    vertical-align: top;
+}
+
+.pe-flag {
+    display: block;
+    margin: 4px 0 14px;
+    color: #445;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.pe-toggle-texts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 10px 0 20px;
+}
+
+.pe-toggle-texts label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #445;
+    font-size: 13px;
+}
+
+.pe-toggle-texts input {
+    padding: 5px 8px;
+    border: 1px solid #c3ccdb;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+/* Im Bearbeitungsmodus sind auch die eingeklappten Erfahrungseintraege sichtbar. */
+.pe-editing .experience-timeline .experience-item-extra {
+    display: block;
+}
+
+/* --- Erneutes Anmelden bei abgelaufener Sitzung --- */
+
+.pe-login {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(9, 12, 26, .6);
+}
+
+.pe-login-box {
+    width: 100%;
+    max-width: 380px;
+    padding: 24px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .3);
+}
+
+.pe-login-box h2 {
+    margin: 0 0 8px;
+    color: #101426;
+    font-size: 20px;
+}
+
+.pe-login-box p {
+    margin: 0 0 16px;
+    color: #55607a;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.pe-login-box label {
+    display: block;
+    margin-bottom: 4px;
+    color: #33415c;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.pe-login-box input {
+    width: 100%;
+    margin-bottom: 14px;
+    padding: 9px 10px;
+    border: 1px solid #c3ccdb;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.pe-login-box button {
+    width: 100%;
+    padding: 10px;
+    border: 0;
+    border-radius: 4px;
+    background: #2f6bff;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.pe-login-box button:disabled {
+    opacity: .6;
+    cursor: default;
+}
+
+.pe-login-error {
+    margin: 0 0 12px !important;
+    padding: 8px 10px;
+    border-radius: 4px;
+    background: #ffe9e9;
+    color: #a12626 !important;
+    font-size: 13px;
+}
