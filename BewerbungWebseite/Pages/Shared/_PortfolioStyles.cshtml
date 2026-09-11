@@ -1,0 +1,692 @@
+@* Layout-Styles der Portfolio-Seite. Von /Index und /Admin/Index gemeinsam genutzt. *@
+    <style>
+        .mean-container .mean-bar::before {
+            content: "Francesco L. D'Amico";
+            font-size: 16px;
+            top: 20px;
+            max-width: 75%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .portfolio-section {
+            padding: 90px 0;
+        }
+
+        /* Schutz vor zu langen CMS-Texten: Admin-seitig verhindern data-max
+           und [StringLength] lange Werte von vornherein, aber ein einzelnes,
+           nicht umbrechbares Wort (z. B. eine ohne Leerzeichen eingefuegte
+           URL) oder ein aelterer Datensatz von vor den Limits soll auch hier
+           nie aus seiner Karte herauslaufen. */
+        #hero, #about, #skills, #projects, #goals, #experience, #documents, #contact {
+            overflow-wrap: break-word;
+        }
+
+        #about {
+            background: #fff;
+        }
+
+        #skills {
+            background: #f8f9fb;
+        }
+
+        #projects {
+            background: #fff;
+        }
+
+        #goals {
+            background: #f8f9fb;
+        }
+
+        #experience {
+            background: #fff;
+        }
+
+        #documents {
+            background: #f8f9fb;
+        }
+
+        #contact {
+            background: #fff;
+        }
+
+        .section-kicker {
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            font-weight: 700;
+        }
+
+        .section-title {
+            margin-bottom: 40px;
+        }
+
+            .section-title h2 {
+                font-size: 38px;
+                margin-bottom: 8px;
+            }
+
+            .section-title p {
+                max-width: 760px;
+                margin: 0 auto;
+            }
+
+        #sticky-header.portfolio-header .container {
+            max-width: 100%;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
+        .portfolio-header .techno_menu ul li a {
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+
+        #sticky-header.portfolio-header .techno_menu ul.nav_scroll {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            margin-left: 0;
+        }
+
+        #sticky-header.portfolio-header .techno_menu > ul > li > a {
+            margin: 30px 8px;
+            font-size: 18px;
+            white-space: nowrap;
+        }
+
+        @@media (min-width: 1650px) {
+            #sticky-header.portfolio-header {
+                position: relative;
+            }
+
+            #sticky-header.portfolio-header .col-lg-8 {
+                position: static;
+            }
+
+            #sticky-header.portfolio-header .techno_menu {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        #sticky-header.portfolio-header {
+            background: rgba(9, 12, 26, .65);
+        }
+
+        /* Der Header liegt halbtransparent ueber dem Hero. Das Template loest die
+           Ueberlappung mit margin-bottom: -91px -- ein fester Wert, der nicht mehr
+           passt, sobald der Name umbricht und der Header hoeher als 91px wird.
+           Dann bleibt oben ein Streifen ohne Hero dahinter und das weisse body
+           scheint als grauer Strich durch. Deshalb den Header aus dem Fluss nehmen:
+           der Hero beginnt so immer bei 0, unabhaengig von der Header-Hoehe. */
+        #sticky-header.portfolio-header:not(.sticky) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        .portfolio-brand {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            display: inline-block;
+            padding: 22px 0;
+            letter-spacing: .02em;
+        }
+
+            .portfolio-brand:hover {
+                color: #fff;
+            }
+
+        .portfolio-header .header-button,
+        .portfolio-header .slider-button-text {
+            display: none;
+        }
+
+        #hero.slider-area.slider8 {
+            /* Das Grund-Theme setzt hier eine feste height: 950px (style.css).
+               Damit lief laengerer Text (Titel, Buttons, Links) unten aus dem
+               dunklen/roten Hintergrund heraus, statt die Section wachsen zu
+               lassen. height: auto + min-height als Untergrenze behebt das --
+               der Hintergrund (background-size: cover) deckt dabei jede Hoehe
+               weiterhin vollstaendig ab. */
+            height: auto;
+            min-height: 650px;
+            background-color: #0b0e1a;
+            background-image: url(/images/slider/banner-a.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        #hero .slider-content h1 {
+            line-height: 1.05;
+        }
+
+        #hero .slider-thumb-images {
+            margin-left: 40px;
+        }
+
+        #hero .slider-thumb-images img {
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        }
+
+        #hero .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        #hero .slider-button2 a {
+            margin-top: 0;
+        }
+
+        #hero .hero-secondary {
+            display: inline-block;
+            padding: 17px 28px;
+            border: 2px solid #fff;
+            color: #fff;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+            #hero .hero-secondary:hover {
+                background: #fff;
+                color: #111;
+            }
+
+        @@media (min-width: 992px) and (max-width: 1199px) {
+            #hero .hero-secondary {
+                padding: 13px 26px;
+                font-size: 16px;
+            }
+        }
+
+        @@media (min-width: 768px) and (max-width: 991px) {
+            #hero .hero-secondary {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+        }
+
+        @@media (min-width: 600px) and (max-width: 767px) {
+            #hero .hero-secondary {
+                padding: 13px 23px;
+                font-size: 15px;
+            }
+        }
+
+        @@media (max-width: 599px) {
+            #hero .hero-secondary {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+        }
+
+        #hero .hero-social {
+            margin-top: 25px;
+        }
+
+            #hero .hero-social a {
+                color: #fff;
+                margin-right: 18px;
+                text-decoration: underline;
+            }
+
+        #hero .slider-socail-icon2 {
+            display: none;
+        }
+
+        #about .about-area {
+            padding: 90px 0;
+            margin-top: 0;
+        }
+
+        #about .techno-about-thumb-3 {
+            margin-left: 0;
+        }
+
+        #about .about-facts {
+            margin-top: 20px;
+        }
+
+        #about .dreamit-section-title h1,
+        #about .dreamit-section-title p {
+            color: #151423;
+        }
+
+        #about .about-fact {
+            background: #f8f9fb;
+            border: 1px solid #e6e8f0;
+            padding: 18px 20px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            /* Label nicht zusammendruecken lassen, wenn der Wert lang wird. */
+            #about .about-fact strong {
+                flex-shrink: 0;
+                max-width: 40%;
+                color: #151423;
+            }
+
+            #about .about-fact span {
+                min-width: 0;
+                color: #33354b;
+            }
+
+            #about .about-fact i {
+                color: #0c5adb;
+            }
+
+        #skills .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #skills .skills-grid > div {
+            margin-bottom: 30px;
+            display: flex;
+        }
+
+        #skills .techno-sinlge-service-box,
+        #skills .techno-sinlge-service-box-1,
+        #skills .techno-sinlge-service-box.active {
+            min-height: 220px;
+            width: 100%;
+        }
+
+        #skills .techno-service-title p {
+            margin-bottom: 0;
+        }
+
+        #projects .project-card {
+            background: #fff;
+            height: 100%;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 30px rgba(20,30,60,.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        #projects .row + .row {
+            margin-top: 30px;
+        }
+
+        #projects .portfolio-details-thumb img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+        }
+
+        #projects .portfolio-details-titles {
+            padding: 24px 24px 8px;
+        }
+
+        #projects .details-category {
+            padding: 0 24px;
+        }
+
+        #projects .project-actions {
+            padding: 14px 24px 24px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+
+            #projects .project-actions a {
+                display: inline-block;
+                padding: 10px 14px;
+                background: #0c5adb;
+                color: #fff;
+                font-weight: 700;
+                border-radius: 2px;
+            }
+
+                #projects .project-actions a.github {
+                    background: #171717;
+                }
+
+        #projects .details-category h4 {
+            margin-top: 12px;
+            margin-bottom: 2px;
+        }
+
+        #projects .details-category h4:first-child {
+            margin-top: 0;
+        }
+
+        #projects .project-card-expanded .portfolio-details-thumb {
+            height: 100%;
+        }
+
+            #projects .project-card-expanded .portfolio-details-thumb img {
+                height: 100%;
+                min-height: 260px;
+            }
+
+        #goals .service-area {
+            padding: 90px 0;
+        }
+
+        #goals .goals-grid {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #goals .goals-grid > div {
+            margin-bottom: 30px;
+            display: flex;
+        }
+
+        #goals .techno-sinlge-service-box,
+        #goals .techno-sinlge-service-box-1 {
+            min-height: 220px;
+            width: 100%;
+        }
+
+        #experience .career-details {
+            padding: 90px 0;
+        }
+
+        #experience .experience-timeline {
+            position: relative;
+            padding-left: 36px;
+        }
+
+            #experience .experience-timeline:before {
+                content: "";
+                position: absolute;
+                top: 8px;
+                bottom: 8px;
+                left: 8px;
+                width: 2px;
+                background: #0c5adb;
+            }
+
+        #experience .experience-item {
+            position: relative;
+            margin-bottom: 28px;
+            padding: 26px 30px;
+            background: #fff;
+            box-shadow: 0 8px 25px rgba(20,30,60,.08);
+        }
+
+            #experience .experience-item:before {
+                content: "";
+                position: absolute;
+                left: -34px;
+                top: 31px;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background: #fff;
+                border: 3px solid #0c5adb;
+            }
+
+            #experience .experience-item h3 {
+                margin-bottom: 6px;
+            }
+
+        #experience .experience-meta {
+            color: #0c5adb;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        #experience .experience-item-extra {
+            display: none;
+        }
+
+            #experience .experience-timeline.is-expanded .experience-item-extra {
+                display: block;
+            }
+
+        #experience .experience-toggle-wrap {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        #experience .experience-toggle-btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background: #0c5adb;
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        #documents .documents-grid {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #documents .documents-grid > div {
+            margin-bottom: 30px;
+            display: flex;
+        }
+
+        #documents .single-circular-box {
+            width: 100%;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 0;
+            padding-bottom: 24px;
+        }
+
+        #documents .circular-btn {
+            position: static;
+            text-align: left;
+            margin-top: 20px;
+            clear: both;
+        }
+
+        #contact .contact-us-area {
+            padding: 90px 0;
+        }
+
+        #contact .contact-copy {
+            padding-right: 35px;
+        }
+
+        #contact .contact-links {
+            margin-top: 22px;
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+            #contact .contact-links a {
+                font-weight: 700;
+                text-decoration: underline;
+            }
+
+        #contact .contact-visual img {
+            width: 100%;
+            max-height: 390px;
+            object-fit: contain;
+        }
+
+        #contact .contact-button {
+            margin-top: 22px;
+        }
+
+        #contact .contact-form {
+            margin-top: 10px;
+        }
+
+        #contact .contact-form button[type="submit"] {
+            display: inline-block;
+            padding: 12px 26px;
+            background: #0c5adb;
+            color: #fff;
+            font-weight: 700;
+            font-family: "Rajdhani";
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            #contact .contact-form button[type="submit"] i {
+                margin-left: 8px;
+            }
+
+            #contact .contact-form button[type="submit"]:hover {
+                background: #094aab;
+            }
+
+        .portfolio-footer.footer-middle {
+            padding: 0;
+            background: #0b0e1a;
+        }
+
+        .portfolio-footer .footer-bottom {
+            margin-top: 0;
+            padding: 28px 0;
+        }
+
+        .portfolio-footer .footer-bottom-content-copy p {
+            margin: 0;
+            text-align: center;
+        }
+
+        .portfolio-footer .footer-bottom .col-lg-12 {
+            text-align: center;
+        }
+
+        @@media (max-width: 991px) {
+            #hero.slider-area.slider8 {
+                min-height: auto;
+                padding: 130px 0 80px;
+            }
+
+            #hero .slider-thumb-images {
+                margin-top: 40px;
+                text-align: center;
+            }
+
+            .portfolio-brand {
+                color: #111;
+                padding: 15px 0;
+            }
+
+            #about .techno-about-thumb-box {
+                margin-bottom: 30px;
+            }
+
+            .portfolio-section {
+                padding: 60px 0;
+            }
+
+            #about .about-area,
+            #goals .service-area,
+            #experience .career-details,
+            #contact .contact-us-area {
+                padding: 60px 0;
+            }
+        }
+
+        @@media (max-width: 767px) {
+            .section-title h2,
+            .dreamit-section-title h1 {
+                font-size: 28px;
+            }
+
+            #hero.slider-area.slider8 {
+                padding: 110px 0 60px;
+                text-align: center;
+            }
+
+            #hero .hero-actions,
+            #hero .hero-social {
+                justify-content: center;
+            }
+
+            #about .about-fact {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            #skills .techno-sinlge-service-box,
+            #skills .techno-sinlge-service-box-1,
+            #skills .techno-sinlge-service-box.active,
+            #goals .techno-sinlge-service-box,
+            #goals .techno-sinlge-service-box-1 {
+                min-height: 0;
+                margin-bottom: 20px;
+            }
+
+            #projects .portfolio-details-thumb img {
+                height: 180px;
+            }
+
+            #projects .project-card {
+                margin-bottom: 60px;
+            }
+
+            #projects .row + .row {
+                margin-top: 0;
+            }
+
+            #experience .experience-timeline {
+                padding-left: 26px;
+            }
+
+            #experience .experience-item {
+                padding: 20px 18px;
+            }
+
+            #experience .experience-item:before {
+                left: -24px;
+            }
+
+            #documents .single-circular-box {
+                text-align: center;
+            }
+
+            #contact .contact-copy {
+                padding-right: 0;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            #contact .contact-links {
+                justify-content: center;
+            }
+
+        }
+
+        @@media (max-width: 480px) {
+            #hero .slider-content h1 {
+                font-size: 32px !important;
+            }
+
+            .mean-container .mean-bar::before {
+                font-size: 14px;
+                max-width: 65%;
+            }
+        }
+    </style>

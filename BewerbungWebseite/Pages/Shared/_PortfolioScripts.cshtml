@@ -1,0 +1,132 @@
+@* Kontaktformular und Erfahrungs-Toggle. Von /Index und /Admin/Index gemeinsam genutzt. *@
+    <script>
+        (function () {
+            var form = document.getElementById("dreamit-form");
+            var messageBox = document.getElementById("contact-form-message");
+            var submitButton = form.querySelector("button[type=submit]");
+
+            function showMessage(text, isSuccess) {
+                messageBox.textContent = text;
+                messageBox.className = "alert " + (isSuccess ? "alert-success" : "alert-danger");
+                messageBox.style.display = "block";
+            }
+
+            function isValidPhone(value) {
+                if (!value) return true;
+                return /^(?:\+41|0041|0)[\s-]?\d{2}(?:[\s-]?\d{3})(?:[\s-]?\d{2}){2}$/.test(value);
+            }
+
+            function isValidEmail(value) {
+                return /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(value);
+            }
+
+            var validators = {
+                name: function (value) {
+                    return value.trim() ? "" : "Bitte geben Sie Ihren Namen ein.";
+                },
+                email: function (value) {
+                    if (!value.trim()) return "Bitte geben Sie Ihre E-Mail-Adresse ein.";
+                    return isValidEmail(value.trim()) ? "" : "Bitte geben Sie eine gültige E-Mail-Adresse ein.";
+                },
+                phone: function (value) {
+                    return isValidPhone(value.trim()) ? "" : "Bitte geben Sie eine gültige Telefonnummer ein.";
+                },
+                subject: function (value) {
+                    return value.trim() ? "" : "Bitte geben Sie einen Betreff ein.";
+                },
+                message: function (value) {
+                    return value.trim() ? "" : "Bitte geben Sie eine Nachricht ein.";
+                }
+            };
+
+            function fieldOf(name) {
+                return form.querySelector("[name=" + name + "]");
+            }
+
+            function validateField(name) {
+                var field = fieldOf(name);
+                var feedback = field.closest(".from-box").querySelector(".invalid-feedback");
+                var error = validators[name](field.value);
+
+                field.classList.toggle("is-invalid", !!error);
+                feedback.textContent = error;
+
+                return !error;
+            }
+
+            function validateAll() {
+                var allValid = true;
+                Object.keys(validators).forEach(function (name) {
+                    if (!validateField(name)) allValid = false;
+                });
+                return allValid;
+            }
+
+            Object.keys(validators).forEach(function (name) {
+                var field = fieldOf(name);
+                field.addEventListener("blur", function () { validateField(name); });
+                field.addEventListener("input", function () {
+                    if (field.classList.contains("is-invalid")) validateField(name);
+                });
+            });
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                if (!validateAll()) {
+                    showMessage("Bitte korrigieren Sie die markierten Felder.", false);
+                    return;
+                }
+
+                var payload = {
+                    name: fieldOf("name").value.trim(),
+                    email: fieldOf("email").value.trim(),
+                    phone: fieldOf("phone").value.trim(),
+                    subject: fieldOf("subject").value.trim(),
+                    message: fieldOf("message").value.trim()
+                };
+
+                submitButton.disabled = true;
+
+                fetch("/api/v1/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                })
+                    .then(function (response) {
+                        if (response.ok) {
+                            showMessage("Danke für die Nachricht! Ich melde mich so schnell wie möglich.", true);
+                            form.reset();
+                        } else {
+                            showMessage("Beim Senden ist leider ein Fehler aufgetreten. Bitte versuchen Sie es erneut", false);
+                        }
+                    })
+                    .catch(function () {
+                        showMessage("Beim Senden ist leider ein Fehler aufgetreten. Bitte versuchen Sie es erneut.", false);
+                    })
+                    .finally(function () {
+                        submitButton.disabled = false;
+                    });
+            });
+        })();
+
+        (function () {
+            var toggleButton = document.getElementById("experience-toggle");
+            var timeline = document.querySelector("#experience .experience-timeline");
+            var experienceSection = document.getElementById("experience");
+
+            if (!toggleButton || !timeline) return;
+
+            toggleButton.addEventListener("click", function () {
+                var isExpanded = timeline.classList.toggle("is-expanded");
+                var moreText = toggleButton.dataset.moreText || "Mehr erfahren";
+                var lessText = toggleButton.dataset.lessText || "Weniger anzeigen";
+                toggleButton.textContent = isExpanded ? lessText : moreText;
+                toggleButton.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+
+                if (!isExpanded && experienceSection) {
+                    experienceSection.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            });
+        })();
+    </script>
