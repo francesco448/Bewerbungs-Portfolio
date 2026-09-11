@@ -1,0 +1,5 @@
+@model EditableText
+@if (Model.EditMode)
+{<span data-field="@Model.Field" @(Model.Max.HasValue ? Html.Raw($"data-max=\"{Model.Max}\"") : Html.Raw("")) contenteditable="true">@Model.Text</span>}
+else
+{@Model.Text}
