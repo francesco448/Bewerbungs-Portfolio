@@ -23,6 +23,16 @@
             overflow-wrap: break-word;
         }
 
+        /* Grosse Ueberschriften (h1) sind meist ein einzelnes Wort oder wenige
+           kurze Woerter -- ein Umbruch mitten im Wort sieht dort schlimmer aus
+           als ein leichtes Ueberlaufen. Nur an Leerzeichen umbrechen; ein
+           einzelnes zu langes Wort laeuft notfalls ueber statt zerrissen zu
+           werden. */
+        #hero h1, #about h1, #skills h1, #projects h1, #goals h1, #experience h1, #documents h1, #contact h1 {
+            overflow-wrap: normal;
+            word-break: normal;
+        }
+
         #about {
             background: #fff;
         }
@@ -162,6 +172,13 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+
+            /* Feste Innenabstaende statt sich auf die Zentrierung durch
+               align-items: center zu verlassen: bei kurzem Text sackt der
+               Inhalt sonst so weit nach oben, dass der Kicker unter der
+               halbtransparenten Nav-Leiste verschwindet, und unten fehlt
+               dann Platz nach den Social-Links. */
+            padding: 140px 0 60px;
         }
 
         #hero .slider-content h1 {

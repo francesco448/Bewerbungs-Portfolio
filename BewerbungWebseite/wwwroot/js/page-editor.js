@@ -75,11 +75,34 @@
         return text.trim();
     }
 
+    // Liest den sichtbaren Text eines Feldes. Der Zeichenzaehler (.pe-charcount)
+    // steht bei den meisten Feldern als Geschwister ausserhalb -- bei der
+    // hervorgehobenen letzten Hero-Titelzeile aber technisch bedingt *innerhalb*
+    // desselben Elements, das hier ausgelesen wird (Feld und Listen-Eintrag sind
+    // dort zwei verschachtelte Elemente statt eines). Ohne dieses Ausblenden
+    // wuerde "3 / 50" als echter Text mitgespeichert. Kurzes Verstecken statt
+    // eines Klons, damit innerText zuverlaessig auf dem echten, gerenderten
+    // Element berechnet wird (auf einem loesgeloesten Klon liefert innerText in
+    // manchen Browsern keine verlaesslichen Werte).
     function readValue(node) {
         if (node.tagName === "INPUT" || node.tagName === "TEXTAREA") {
             return node.value;
         }
-        return normalizeText(node.innerText, node.dataset.multiline === "true");
+
+        var counters = node.querySelectorAll(".pe-charcount");
+        var previousDisplay = [];
+        counters.forEach(function (counter, i) {
+            previousDisplay[i] = counter.style.display;
+            counter.style.display = "none";
+        });
+
+        var text = node.innerText;
+
+        counters.forEach(function (counter, i) {
+            counter.style.display = previousDisplay[i];
+        });
+
+        return normalizeText(text, node.dataset.multiline === "true");
     }
 
     function collect(container) {

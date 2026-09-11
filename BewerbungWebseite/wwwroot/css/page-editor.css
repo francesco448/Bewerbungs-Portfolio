@@ -82,6 +82,16 @@
     cursor: text;
 }
 
+/* Grosse Ueberschriften (h1) sind meist ein einzelnes Wort oder wenige kurze
+   Woerter -- ein Umbruch mitten im Wort (siehe oben) sieht dort schlimmer aus
+   als ein leichtes Ueberlaufen. Deshalb hier zurueck auf normales Verhalten:
+   nur an Leerzeichen umbrechen, ein einzelnes zu langes Wort laeuft notfalls
+   ueber statt zerrissen zu werden. */
+.pe-editing h1[contenteditable="true"] {
+    overflow-wrap: normal;
+    word-break: normal;
+}
+
 .pe-editing [contenteditable="true"]:focus {
     outline: 2px solid #2f6bff;
     background: rgba(47, 107, 255, .08);
