@@ -39,7 +39,38 @@ public static class SeedData
 
                 context.SaveChanges();
             }
+
+            SeedPageContent(context);
         }
+    }
+
+    /// <summary>
+    /// Legt den Startinhalt der Seite einmalig an. Der Startwert stammt aus
+    /// SeedData/page-content.json, damit die Seite nach der Umstellung optisch
+    /// unveraendert bleibt. Existiert die Zeile bereits, passiert nichts --
+    /// spaetere Aenderungen im Editor werden also nie ueberschrieben.
+    /// </summary>
+    private static void SeedPageContent(RazorPagesMovieContext context)
+    {
+        if (context.PageContent.Any())
+        {
+            return;
+        }
+
+        var path = Path.Combine(AppContext.BaseDirectory, "SeedData", "page-content.json");
+        if (!File.Exists(path))
+        {
+            return;
+        }
+
+        context.PageContent.Add(new PageContentEntity
+        {
+            Id = PageContentEntity.SingletonId,
+            Content = File.ReadAllBytes(path),
+            UpdatedAt = DateTime.UtcNow
+        });
+
+        context.SaveChanges();
     }
 
     private class AdminAccountSeed

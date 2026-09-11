@@ -1,0 +1,170 @@
+{
+  "hero": {
+    "kicker": "Applikationsentwickler",
+    "titleLines": [ "FRANCESCO", "LORENZO", "D'AMICO" ],
+    "intro": "Ich entwickle gerne Anwendungen, bei denen aus einer Idee Schritt für Schritt eine funktionierende Lösung entsteht. Auf dieser Seite zeige ich ausgewählte Projekte, Technologien, mit denen ich bereits gearbeitet habe, und was ich bisher in der Applikationsentwicklung gelernt habe.",
+    "primaryButton": { "text": "PROJEKTE ANSEHEN", "url": "#projects" },
+    "secondaryButton": { "text": "Kontakt aufnehmen", "url": "#contact" },
+    "socialLinks": [
+      { "text": "LinkedIn", "url": "https://www.linkedin.com/in/francesco-d-amico-342b61356/" },
+      { "text": "E-Mail", "url": "mailto:Francescodamico649@gmail.com" }
+    ],
+    "portraitImage": "/images/resource/Bewerbung_Foto.jpeg",
+    "portraitAlt": "Francesco Lorenzo D'Amico"
+  },
+  "about": {
+    "image": "/images/about/my-personal-workspace.jpg",
+    "imageAlt": "Über mich",
+    "kicker": "Über mich",
+    "titleLine1": "APPLIKATIONSENTWICKLUNG",
+    "titleLine2": "MIT",
+    "titleLine2Highlight": "NEUGIER",
+    "text": "Mich fasziniert an der Softwareentwicklung, dass aus einer Idee Schritt für Schritt eine funktionierende Anwendung entsteht. Dabei möchte ich nicht nur wissen, dass etwas funktioniert, sondern auch verstehen, warum. Ich arbeite gerne strukturiert, probiere neue Technologien aus und verbessere Lösungen iterativ.",
+    "facts": [
+      { "label": "Denkweise", "value": "Produktorientiert & zukunftsgerichtet" },
+      { "label": "Arbeitsweise", "value": "Strukturiert & lösungsorientiert" },
+      { "label": "Interessen", "value": "Moderne Technologien & Trends" },
+      { "label": "Lernhaltung", "value": "Neugier & praxisorientiert" }
+    ]
+  },
+  "skills": {
+    "kicker": "Kompetenzen",
+    "title": "MEINE TECHNISCHEN",
+    "titleHighlight": "SKILLS",
+    "intro": "Technologien und Arbeitsweisen, mit denen ich bereits gearbeitet habe.",
+    "items": [
+      { "icon": "flaticon-pen", "title": "Backend", "text": "ASP.NET Core · Entity Framework Core · REST APIs · C# · PHP · Symfony" },
+      { "icon": "flaticon-chat", "title": "Frontend", "text": "React · SASS · Symfony-Twig · PHP Bootstrap · razor-pages · html · css · javascript" },
+      { "icon": "flaticon-database", "title": "DB", "text": "MongoDB · MS SQL Server", "highlighted": true },
+      { "icon": "flaticon-settings", "title": "Systeme", "text": "Docker · TrueNAS · Webhosting-Grundlagen · Windows · Linux basics" },
+      { "icon": "flaticon-growth", "title": "AI", "text": "Prompting · Code-Unterstützung · Recherche" },
+      { "icon": "flaticon-clock", "title": "Soft Skills", "text": "Strukturiertes Arbeiten · Lernbereitschaft · selbstständige Fehlersuche · Zuverlässigkeit" }
+    ]
+  },
+  "projects": {
+    "kicker": "Projekte",
+    "title": "MEINE",
+    "titleHighlight": "PROJEKTE",
+    "items": [
+      {
+        "image": "/images/projects/bewerbungsseite.png",
+        "imageAlt": "Bewerbungsseite",
+        "title": "Bewerbungsseite",
+        "descriptionLead": "",
+        "description": "Meine eigene Bewerbungswebsite, entwickelt mit ASP.NET Core Razor Pages, um Lebenslauf, Projekte und Fähigkeiten in einer selbst gebauten Anwendung zu präsentieren.",
+        "details": [
+          { "heading": "TECH:", "text": "C# · ASP.NET Core Razor Pages · Entity Framework Core · Bootstrap · JavaScript" },
+          { "heading": "Meine Arbeit:", "text": "Konzeption, Umsetzung und laufende Weiterentwicklung von Struktur, Styling und Inhalten sowie Deployment im eigenen Homelab." }
+        ],
+        "links": [
+          { "text": "Projekt ansehen", "url": "https://francesco-damico.ch/" },
+          { "text": "GitHub", "url": "https://github.com/francesco448/Bewerbungs-Portfolio" }
+        ],
+        "wide": false
+      },
+      {
+        "image": "/images/projects/Screenshot 2026-08-24 153904.png",
+        "imageAlt": "Francesco's Recipes World",
+        "title": "Francesco's Recipes World",
+        "descriptionLead": "",
+        "description": "Full-Stack-Rezeptverwaltung zum Erstellen, Bearbeiten und Kategorisieren von Rezepten, Zutaten und Einheiten. Die Anwendung basiert auf einer strukturierten MVC-Architektur und relationaler Datenmodellierung.",
+        "details": [
+          { "heading": "TECH:", "text": "C# · ASP.NET Core MVC · Entity Framework Core · JavaScript · AJAX" },
+          { "heading": "Meine Arbeit:", "text": "Datenmodellierung, Controller- und Geschäftslogik, Razor-Views, CRUD-Funktionen sowie AJAX-Integration umgesetzt." }
+        ],
+        "links": [
+          { "text": "Projekt ansehen", "url": "https://francescos-rezepten-tool.francesco-damico.ch/" },
+          { "text": "GitHub", "url": "https://github.com/francesco448/Francescos.Recipes.World" }
+        ],
+        "wide": false
+      },
+      {
+        "image": "/images/projects/Screenshot 2026-08-24 154143.png",
+        "imageAlt": "Realtime Chat App",
+        "title": "Realtime Chat App",
+        "descriptionLead": "",
+        "description": "Echtzeit-Chat-Anwendung mit React-Frontend, Node.js-Backend und persistenter Datenspeicherung. Nachrichten und Räume werden über Socket.IO in Echtzeit synchronisiert.",
+        "details": [
+          { "heading": "TECH:", "text": "React · Node.js · Express · Socket.IO · MongoDB · Docker" },
+          { "heading": "Meine Arbeit:", "text": "Frontend und Backend umgesetzt, Echtzeitkommunikation integriert, Datenhaltung angebunden und Anwendung mit Docker containerisiert." }
+        ],
+        "links": [
+          { "text": "Projekt ansehen", "url": "https://chatapp.francesco-damico.ch/" },
+          { "text": "GitHub", "url": "https://github.com/francesco448/chat-app" }
+        ],
+        "wide": true
+      },
+      {
+        "image": "/images/projects/Screenshot 2026-08-24 175017.png",
+        "imageAlt": "TrueNAS SCALE Dashboard",
+        "title": "Homelab / Self-Hosting",
+        "descriptionLead": "Ziel:",
+        "description": "Aufbau einer eigenen Hosting-Umgebung, um Anwendungen und Dienste selbst zu betreiben und praktische Erfahrung mit Infrastruktur, Netzwerken und Deployment zu sammeln.",
+        "details": [
+          { "heading": "Hardware / System:", "text": "TrueNAS SCALE · Intel Core i5-6600 @ 3.30 GHz · 4 Kerne / 4 Threads · 16 GB RAM · ZFS-Speicherpool mit RAIDZ1 aus 3 HDDs · 1 Gbit Ethernet / Full Duplex" },
+          { "heading": "Services:", "text": "Nginx Proxy Manager · Duplicati · Gitea · Scrutiny · Planka sowie selbst gehostete eigene Anwendungen wie Realtime Chat App, Francesco's Recipes World und diese Bewerbungsseite" },
+          { "heading": "Sicherheit:", "text": "HTTPS für öffentlich erreichbare Dienste · Reverse Proxy über Nginx Proxy Manager · DNS-basierte Weiterleitung · getrennte Container und Services" },
+          { "heading": "Meine Arbeit:", "text": "Planung und Einrichtung der Homelab-Umgebung, Konfiguration von TrueNAS SCALE, Aufbau des ZFS-/RAIDZ1-Speichers, Deployment und Verwaltung von Docker-Containern über Custom Apps und YAML, Einrichtung von Nginx Proxy Manager, DNS-Routing über Subdomains der eigenen Domain francesco-damico.ch und HTTPS sowie Betrieb eigener Webanwendungen und Datenbanken." },
+          { "heading": "Gelernt:", "text": "Docker und Container Networking · YAML-basierte Deployments · Reverse Proxy · DNS · HTTPS · ZFS und RAIDZ1 · Self-Hosting · Deployment eigener Anwendungen · Backup-Konzept · Fehleranalyse und Troubleshooting" }
+        ],
+        "links": [],
+        "wide": true
+      }
+    ]
+  },
+  "goals": {
+    "kicker": "Meine Ziele",
+    "title": "WAS ICH",
+    "titleHighlight": "ERREICHEN MÖCHTE",
+    "items": [
+      { "icon": "flaticon-growth", "title": "Praxis vertiefen", "text": "Meine bisherigen Kenntnisse in weiteren Projekten anwenden, Verantwortung übernehmen und mich fachlich weiterentwickeln." },
+      { "icon": "flaticon-pen", "title": "Moderne Technologien einsetzen", "text": "Mit aktuellen Technologien arbeiten, neue Ansätze kennenlernen und passende Lösungen für reale Anforderungen finden." },
+      { "icon": "flaticon-chat", "title": "Eigene Ideen umsetzen", "text": "Projekte weiterdenken, verbessern und aus Ideen langfristig funktionierende Lösungen entwickeln.", "highlighted": true },
+      { "icon": "flaticon-clock", "title": "Als Entwickler wachsen", "text": "Meine technischen und persönlichen Fähigkeiten kontinuierlich ausbauen und Schritt für Schritt mehr Verantwortung übernehmen." }
+    ]
+  },
+  "experience": {
+    "kicker": "Erfahrung",
+    "title": "BERUFLICHE",
+    "titleHighlight": "ERFAHRUNG",
+    "toggleMoreText": "Mehr erfahren",
+    "toggleLessText": "Weniger anzeigen",
+    "items": [
+      { "title": "Agile Methodiken, wie Scrum", "meta": "Schule & Praxis · laufend angewendet", "detailHeading": "Aufgaben & Verantwortlichkeiten:", "text": "Arbeit in klar definierten Aufgaben und Etappen mit regelmässigen Abstimmungen im Team, iterativer Entwicklung von Lösungen mit regelmässigem Feedback sowie flexibler Anpassung an neue Anforderungen und Nachverfolgung des Projektstands.", "collapsed": false },
+      { "title": "Git Flow", "meta": "Schule & Praxis · laufend angewendet", "detailHeading": "Aufgaben & Verantwortlichkeiten:", "text": "Strukturierte Versionsverwaltung mit separaten Branches für neue Funktionen und Änderungen sowie kontrolliertes Zusammenführen des Codes im Team.", "collapsed": false },
+      { "title": "IPERKA", "meta": "Schule & Praxis · laufend angewendet", "detailHeading": "Aufgaben & Verantwortlichkeiten:", "text": "Strukturiertes Vorgehen bei Aufträgen nach dem Handlungszyklus Informieren, Planen, Entscheiden, Realisieren, Kontrollieren und Auswerten.", "collapsed": false },
+      { "title": "Ticketsystem-Arbeit", "meta": "Schule & Praxis · laufend angewendet", "detailHeading": "Aufgaben & Verantwortlichkeiten:", "text": "Erfassen, Priorisieren und Abarbeiten von Aufgaben in Ticketsystemen wie Jira zur strukturierten Nachverfolgung des Projektstands.", "collapsed": true },
+      { "title": "Testing & Fehleranalyse", "meta": "Schule & Praxis · laufend angewendet", "detailHeading": "Aufgaben & Verantwortlichkeiten:", "text": "Manuelles Testen von Funktionen sowie systematische Fehleranalyse und Debugging in echten Projekten zur Sicherstellung der Softwarequalität.", "collapsed": true },
+      { "title": "Dokumentation", "meta": "Schule · vereinzelt in Projekten", "detailHeading": "Aufgaben & Verantwortlichkeiten:", "text": "Vor allem in der Berufsschule Dokumentationen verfasst; in Projekten mit weiteren Mitarbeitenden zusätzlich Code an relevanten Stellen kommentiert, im Lehrbetrieb selbst eher selten.", "collapsed": true },
+      { "title": "CI/CD & Deployment", "meta": "Schule & Praxis · laufend angewendet", "detailHeading": "Aufgaben & Verantwortlichkeiten:", "text": "Containerisierung und Deployment von Anwendungen mit Docker sowie strukturierte Versionierung von Releases.", "collapsed": true },
+      { "title": "Datenbank-Design", "meta": "Schule & Praxis · laufend angewendet", "detailHeading": "Aufgaben & Verantwortlichkeiten:", "text": "Modellierung und Normalisierung relationaler Datenbanken in echten Projekten zur strukturierten Datenhaltung.", "collapsed": true },
+      { "title": "Code Reviews", "meta": "Schule & Praxis · laufend angewendet", "detailHeading": "Aufgaben & Verantwortlichkeiten:", "text": "Eigenen Code von anderen prüfen lassen, um Feedback zur Codequalität einzuholen und daraus zu lernen.", "collapsed": true }
+    ]
+  },
+  "documents": {
+    "kicker": "Dokumente & Zertifikate",
+    "title": "DOKUMENTE &",
+    "titleHighlight": "ZERTIFIKATE",
+    "items": [
+      { "title": "BBC-Zertifikat", "description": "Erfolgreich abgeschlossenes Basislehrjahr Informatik mit praxisnahen Grundlagen in Programmierung, Betriebssystemen, Datenbanken, IoT, Applikationsentwicklung, Webentwicklung Frontend/Backend, Mobile App Entwicklung und individueller Projektarbeit.", "fileUrl": "/documents/Bbc-Zertifikat.pdf", "linkText": "DOKUMENT ÖFFNEN" },
+      { "title": "ÜK 106 – Kompetenznachweis", "description": "Vertiefung der Grundlagen im Umgang mit relationalen Datenbanken, insbesondere beim Abfragen, Bearbeiten und Pflegen von Daten sowie beim strukturierten Arbeiten mit Datenbanksystemen.", "fileUrl": "/documents/üK-106-Kompetenznachweis.pdf", "linkText": "DOKUMENT ÖFFNEN" },
+      { "title": "ÜK 187 – Kompetenznachweis", "description": "Praktische Auseinandersetzung mit der Einrichtung und Inbetriebnahme eines ICT-Arbeitsplatzes inklusive Betriebssystem, grundlegender Systemkonfiguration und Vorbereitung für den produktiven Einsatz.", "fileUrl": "/documents/üK-187-Kompetenznachweis.pdf", "linkText": "DOKUMENT ÖFFNEN" },
+      { "title": "ÜK 216 – Kompetenznachweis", "description": "Integration vernetzter Endgeräte in bestehende Plattformen mit Fokus auf Kommunikation, Einbindung von Geräten und Zusammenspiel verschiedener Komponenten innerhalb einer IoT-Umgebung.", "fileUrl": "/documents/üK-216-Kompetenznachweis.pdf", "linkText": "DOKUMENT ÖFFNEN" },
+      { "title": "ÜK 223 – Kompetenznachweis", "description": "Entwicklung einer objektorientierten Anwendung für mehrere Benutzer mit Fokus auf sauberer Programmstruktur, Objektorientierung und der Umsetzung von Multi-User-Funktionalitäten.", "fileUrl": "/documents/üK-223-Kompetenznachweis.pdf", "linkText": "DOKUMENT ÖFFNEN" },
+      { "title": "ÜK 295 – Kompetenznachweis", "description": "Umsetzung serverseitiger Applikationslogik mit Fokus auf Backend-Strukturen, Datenverarbeitung und der technischen Grundlage für funktionsfähige Webanwendungen.", "fileUrl": "/documents/üK-295-Kompetenznachweis.pdf", "linkText": "DOKUMENT ÖFFNEN" },
+      { "title": "ÜK 335 – Kompetenznachweis", "description": "Planung und Umsetzung einer mobilen Anwendung mit Fokus auf mobile Benutzeroberflächen, Applikationslogik und die praktische Entwicklung für mobile Endgeräte.", "fileUrl": "/documents/üK-335-Kompetenznachweis.pdf", "linkText": "DOKUMENT ÖFFNEN" },
+      { "title": "ÜK 294 – Kompetenznachweis", "description": "Entwicklung interaktiver Weboberflächen mit Fokus auf Benutzerinteraktion, strukturiertem Frontend-Aufbau und der Umsetzung funktionaler Webanwendungen.", "fileUrl": "/documents/üK-294-Kompetenznachweis.pdf", "linkText": "DOKUMENT ÖFFNEN" }
+    ]
+  },
+  "contact": {
+    "kicker": "KONTAKT",
+    "title": "GET IN",
+    "titleHighlight": "TOUCH",
+    "formHeading": "Sie möchten mehr über meine Projekte oder meine Bewerbung erfahren?\nIch freue mich über eine Nachricht.",
+    "infoBoxes": [
+      { "icon": "flaticon-suitcase", "title": "STANDORT", "text": "Schweiz, Bern", "linkUrl": "" },
+      { "icon": "flaticon-call", "title": "TELEFON", "text": "079 736 73 55", "linkUrl": "tel:0797367355" },
+      { "icon": "flaticon-communications", "title": "E-MAIL", "text": "francesco.damico@gmx.ch", "linkUrl": "mailto:francesco.damico@gmx.ch" }
+    ]
+  }
+}
